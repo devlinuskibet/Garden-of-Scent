@@ -1,16 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import HeroSection from '../components/HeroSection';
 import ProductCard from '../components/ProductCard';
+import { products } from '../data/products';
 
 const Home = ({ addToCollection }) => {
-  const [featured, setFeatured] = useState([]);
-
-  useEffect(() => {
-    fetch('http://localhost:5000/api/products')
-      .then(res => res.json())
-      .then(data => setFeatured(data.slice(0, 3)))
-      .catch(err => console.error(err));
-  }, []);
+  const [featured] = useState(products.slice(0, 4));
 
   return (
     <div className="home-page">

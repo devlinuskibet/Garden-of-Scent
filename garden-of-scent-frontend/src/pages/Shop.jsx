@@ -2,41 +2,35 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import ProductCard from '../components/ProductCard';
 
+import { products as staticProducts } from '../data/products';
+
 const Shop = ({ addToCollection }) => {
-  const [products, setProducts] = useState([]);
-  const [allProducts, setAllProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [products, setProducts] = useState(staticProducts);
+  const [allProducts, setAllProducts] = useState(staticProducts);
   const [activeCategory, setActiveCategory] = useState('All');
   const [activeSubBrand, setActiveSubBrand] = useState('All');
   const location = useLocation();
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      setLoading(true);
-      try {
-        const url = `http://localhost:5000/api/products${location.search}`;
-        const res = await fetch(url);
-        const data = await res.json();
-        if (Array.isArray(data)) {
-          if (data.length === 0) {
-            console.log("Products from API:", data);
-          }
-          setProducts(data);
-          setAllProducts(data);
-        } else {
-          console.log("Products from API:", data);
-          setProducts([]);
-          setAllProducts([]);
-        }
-      } catch (err) {
-        console.error('Fetch error:', err);
-        setProducts([]);
-        setAllProducts([]);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchProducts();
+    if (location.search) {
+      const searchParams = new URLSearchParams(location.search);
+      const vibe = searchParams.get('vibe');
+      const intensity = searchParams.get('intensity');
+      const occasion = searchParams.get('occasion');
+      const scent_family = searchParams.get('scent_family');
+
+      let filtered = staticProducts;
+      if (vibe) filtered = filtered.filter(p => p.vibe_tag === vibe);
+      if (intensity) filtered = filtered.filter(p => p.intensity === intensity);
+      if (occasion) filtered = filtered.filter(p => p.occasion === occasion);
+      if (scent_family) filtered = filtered.filter(p => p.scent_family === scent_family);
+
+      setProducts(filtered);
+      setAllProducts(filtered);
+    } else {
+      setProducts(staticProducts);
+      setAllProducts(staticProducts);
+    }
   }, [location.search]);
 
   const handleCategoryChange = (cat) => {
@@ -159,11 +153,7 @@ const Shop = ({ addToCollection }) => {
           </div>
         )}
 
-        {loading ? (
-          <div className="flex-center" style={{ height: '400px' }}>
-            <p style={{ letterSpacing: '4px', textTransform: 'uppercase', opacity: 0.4, fontSize: '0.8rem' }}>Seeking essence...</p>
-          </div>
-        ) : (!Array.isArray(products) || products.length === 0) ? (
+        {(!Array.isArray(products) || products.length === 0) ? (
           <div className="flex-center" style={{ height: '400px', flexDirection: 'column', textAlign: 'center', gap: '30px' }}>
             <p style={{ opacity: 0.5, fontSize: '1.1rem' }}>No fragrances matched this profile.</p>
             <a href="/shop" className="btn btn-outline">View All Scents</a>

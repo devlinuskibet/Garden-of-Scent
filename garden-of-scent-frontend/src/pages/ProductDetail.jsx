@@ -1,23 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import NotePyramid from '../components/NotePyramid';
+import { products } from '../data/products';
 
 const ProductDetail = ({ addToCollection }) => {
   const { id } = useParams();
-  const [product, setProduct] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const product = products.find(p => p.id === parseInt(id));
 
-  useEffect(() => {
-    fetch(`http://localhost:5000/api/products/${id}`)
-      .then(res => res.json())
-      .then(data => {
-        setProduct(data);
-        setLoading(false);
-      })
-      .catch(err => console.error(err));
-  }, [id]);
-
-  if (loading) return <div className="flex-center" style={{ height: '100vh' }}>Loading...</div>;
   if (!product) return <div className="flex-center" style={{ height: '100vh' }}>Product not found.</div>;
 
   return (
