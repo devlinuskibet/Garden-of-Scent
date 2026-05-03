@@ -24,7 +24,7 @@ const Home = ({ addToCollection }) => {
           <h2 style={{ fontSize: '3.5rem', fontFamily: 'var(--font-heading)' }}>Featured Blooms</h2>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '40px' }}>
+        <div className="product-grid">
           {featured.map(product => (
             <ProductCard key={product.id} product={product} addToCollection={addToCollection} />
           ))}

@@ -41,7 +41,7 @@ const MyCollection = ({ collection, removeFromCollection }) => {
             <a href="/shop" className="btn btn-outline" style={{ display: 'inline-block', textDecoration: 'none' }}>Back to Shop</a>
           </div>
         ) : (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: '40px' }}>
+          <div className="product-grid">
             {collection.map(product => (
               <div key={product.id} style={{ position: 'relative' }}>
                 <ProductCard product={product} addToCollection={() => {}} />

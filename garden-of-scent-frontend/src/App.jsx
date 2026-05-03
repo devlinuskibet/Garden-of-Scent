@@ -68,20 +68,26 @@ const Toast = ({ message }) => {
 };
 
 const Navbar = ({ collectionCount }) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
     <nav className="glass" style={{
       position: 'fixed', top: 0, width: '100%', height: 'var(--header-height)', 
-      zIndex: 100
+      zIndex: 100,
+      backdropFilter: 'blur(10px)',
+      WebkitBackdropFilter: 'blur(10px)'
     }}>
       <div className="container flex-between" style={{ height: '100%' }}>
-        <Link to="/" style={{ fontSize: '24px', fontFamily: 'var(--font-heading)', letterSpacing: '2px' }}>GARDEN OF SCENT</Link>
-        <ul className="flex" style={{ gap: '40px', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '2px' }}>
-          <li><Link to="/shop">Our Products</Link></li>
-          <li><Link to="/about">Heritage</Link></li>
-          <li><Link to="/quiz" style={{ color: 'var(--secondary)' }}>Scent Finder ✦</Link></li>
-          <li><Link to="/contact">Talk to Us</Link></li>
+        <Link to="/" style={{ fontSize: '24px', fontFamily: 'var(--font-heading)', letterSpacing: '2px', zIndex: 101 }}>GARDEN OF SCENT</Link>
+        
+        <ul className={`nav-links ${isMenuOpen ? 'open' : ''}`}>
+          <li><Link to="/shop" onClick={() => setIsMenuOpen(false)}>Our Products</Link></li>
+          <li><Link to="/about" onClick={() => setIsMenuOpen(false)}>Heritage</Link></li>
+          <li><Link to="/quiz" style={{ color: 'var(--secondary)' }} onClick={() => setIsMenuOpen(false)}>Scent Finder ✦</Link></li>
+          <li><Link to="/contact" onClick={() => setIsMenuOpen(false)}>Talk to Us</Link></li>
         </ul>
-        <div className="flex" style={{ gap: '30px', alignItems: 'center' }}>
+
+        <div className="flex" style={{ gap: '20px', alignItems: 'center', zIndex: 101 }}>
           <Link 
             to="/collection" 
             style={{ 
@@ -97,6 +103,16 @@ const Navbar = ({ collectionCount }) => {
           >
             Collection <span style={{ color: 'var(--secondary)', fontWeight: 700 }}>({collectionCount})</span>
           </Link>
+          
+          <button 
+            className={`hamburger ${isMenuOpen ? 'open' : ''}`} 
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
         </div>
       </div>
     </nav>

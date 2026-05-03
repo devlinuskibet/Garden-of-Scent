@@ -48,8 +48,8 @@ const ProductCard = ({ product, addToCollection }) => {
             color: '#000',
             border: 'none',
             borderRadius: '50%',
-            width: '35px',
-            height: '35px',
+            width: '48px',
+            height: '48px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -92,6 +92,7 @@ const ProductCard = ({ product, addToCollection }) => {
           rel="noopener noreferrer"
           style={{
             marginTop: 'auto',
+            minHeight: '48px',
             padding: '12px',
             border: '1px solid var(--secondary)',
             color: 'var(--secondary)',
@@ -100,7 +101,9 @@ const ProductCard = ({ product, addToCollection }) => {
             letterSpacing: '1px',
             fontSize: '0.8rem',
             transition: 'all 0.3s ease',
-            display: 'block'
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
           }}
           onMouseEnter={(e) => {
             e.target.style.background = 'var(--secondary)';
@@ -118,6 +121,7 @@ const ProductCard = ({ product, addToCollection }) => {
           onClick={handleAdd}
           style={{
             marginTop: '12px',
+            minHeight: '48px',
             background: 'none',
             border: 'none',
             color: added ? 'var(--secondary)' : 'var(--text)',

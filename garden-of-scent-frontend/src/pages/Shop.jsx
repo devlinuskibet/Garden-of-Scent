@@ -169,7 +169,7 @@ const Shop = ({ addToCollection }) => {
             <a href="/shop" className="btn btn-outline">View All Scents</a>
           </div>
         ) : (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: '40px' }}>
+          <div className="product-grid">
             {products.map(product => (
               <ProductCard key={product.id} product={product} addToCollection={addToCollection} />
             ))}
