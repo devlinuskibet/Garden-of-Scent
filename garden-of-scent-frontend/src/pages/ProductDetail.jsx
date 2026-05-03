@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import NotePyramid from '../components/NotePyramid';
 
-const ProductDetail = ({ addToCart }) => {
+const ProductDetail = ({ addToCollection }) => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -62,7 +62,7 @@ const ProductDetail = ({ addToCart }) => {
             <button 
               className="btn btn-primary" 
               style={{ flex: 1, padding: '20px' }}
-              onClick={() => addToCart(product)}
+              onClick={() => addToCollection(product)}
             >
               Add to Collection
             </button>

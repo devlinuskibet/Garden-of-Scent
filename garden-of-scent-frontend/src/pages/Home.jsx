@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import HeroSection from '../components/HeroSection';
 import ProductCard from '../components/ProductCard';
 
-const Home = ({ addToCart }) => {
+const Home = ({ addToCollection }) => {
   const [featured, setFeatured] = useState([]);
 
   useEffect(() => {
@@ -26,7 +26,7 @@ const Home = ({ addToCart }) => {
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '40px' }}>
           {featured.map(product => (
-            <ProductCard key={product.id} product={product} addToCart={addToCart} />
+            <ProductCard key={product.id} product={product} addToCollection={addToCollection} />
           ))}
         </div>
       </section>

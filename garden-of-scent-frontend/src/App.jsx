@@ -7,7 +7,7 @@ import ProductDetail from './pages/ProductDetail';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import Quiz from './pages/Quiz';
-import CartDrawer from './components/CartDrawer';
+import MyCollection from './pages/MyCollection';
 
 const WHATSAPP_LINK = "https://wa.me/254790147780?text=Hello%2C%20what%20perfume%20are%20you%20looking%20for%20today%3F";
 
@@ -16,7 +16,7 @@ const WhatsAppFAB = () => (
     href={WHATSAPP_LINK}
     target="_blank"
     rel="noopener noreferrer"
-    title="Chat on WhatsApp"
+    title="Chat with us"
     style={{
       position: 'fixed',
       bottom: '35px',
@@ -43,7 +43,31 @@ const WhatsAppFAB = () => (
   </a>
 );
 
-const Navbar = ({ cartCount, onCartClick }) => {
+const Toast = ({ message }) => {
+  if (!message) return null;
+  return (
+    <div style={{
+      position: 'fixed',
+      bottom: '40px',
+      left: '50%',
+      transform: 'translateX(-50%)',
+      background: 'var(--secondary)',
+      color: '#000',
+      padding: '12px 24px',
+      borderRadius: '30px',
+      fontSize: '0.85rem',
+      letterSpacing: '1px',
+      textTransform: 'uppercase',
+      fontWeight: 600,
+      zIndex: 1000,
+      boxShadow: '0 10px 30px rgba(0,0,0,0.2)',
+    }}>
+      {message}
+    </div>
+  );
+};
+
+const Navbar = ({ collectionCount }) => {
   return (
     <nav className="glass" style={{
       position: 'fixed', top: 0, width: '100%', height: 'var(--header-height)', 
@@ -52,14 +76,14 @@ const Navbar = ({ cartCount, onCartClick }) => {
       <div className="container flex-between" style={{ height: '100%' }}>
         <Link to="/" style={{ fontSize: '24px', fontFamily: 'var(--font-heading)', letterSpacing: '2px' }}>GARDEN OF SCENT</Link>
         <ul className="flex" style={{ gap: '40px', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '2px' }}>
-          <li><Link to="/shop">Boutique</Link></li>
+          <li><Link to="/shop">Our Products</Link></li>
           <li><Link to="/about">Heritage</Link></li>
           <li><Link to="/quiz" style={{ color: 'var(--secondary)' }}>Scent Finder ✦</Link></li>
-          <li><Link to="/contact">Concierge</Link></li>
+          <li><Link to="/contact">Talk to Us</Link></li>
         </ul>
         <div className="flex" style={{ gap: '30px', alignItems: 'center' }}>
-          <button 
-            onClick={onCartClick} 
+          <Link 
+            to="/collection" 
             style={{ 
               color: 'var(--text)', 
               fontSize: '0.8rem', 
@@ -68,13 +92,11 @@ const Navbar = ({ cartCount, onCartClick }) => {
               display: 'flex', 
               alignItems: 'center', 
               gap: '8px',
-              cursor: 'pointer',
-              border: 'none',
-              background: 'none'
+              textDecoration: 'none'
             }}
           >
-            Collection <span style={{ color: 'var(--secondary)', fontWeight: 700 }}>({cartCount})</span>
-          </button>
+            Collection <span style={{ color: 'var(--secondary)', fontWeight: 700 }}>({collectionCount})</span>
+          </Link>
         </div>
       </div>
     </nav>
@@ -93,10 +115,10 @@ const Footer = () => (
           <div>
             <h4 style={{ color: 'var(--secondary)', marginBottom: '15px', textTransform: 'uppercase', fontSize: '0.7rem', letterSpacing: '2px' }}>Explore</h4>
             <ul style={{ fontSize: '0.9rem', opacity: 0.8, lineHeight: 2.2, listStyle: 'none' }}>
-              <li><Link to="/shop">The Boutique</Link></li>
+              <li><Link to="/shop">Our Products</Link></li>
               <li><Link to="/quiz">Scent Finder ✦</Link></li>
               <li><Link to="/about">Our Heritage</Link></li>
-              <li><Link to="/contact">Concierge</Link></li>
+              <li><Link to="/contact">Talk to Us</Link></li>
             </ul>
           </div>
         </div>
@@ -106,9 +128,16 @@ const Footer = () => (
   </footer>
 );
 
-export default function App() {
-  const [cart, setCart] = useState([]);
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+function App() {
+  const [collection, setCollection] = useState(() => {
+    const saved = localStorage.getItem('gardenOfScentCollection');
+    return saved ? JSON.parse(saved) : [];
+  });
+  const [toastMessage, setToastMessage] = useState(null);
+
+  useEffect(() => {
+    localStorage.setItem('gardenOfScentCollection', JSON.stringify(collection));
+  }, [collection]);
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
@@ -124,10 +153,8 @@ export default function App() {
       reveals.forEach(el => observer.observe(el));
     };
 
-    // Initial setup
     setupObserver();
 
-    // Watch for dynamic content (like products from API)
     const mutationObserver = new MutationObserver(() => {
       setupObserver();
     });
@@ -140,47 +167,34 @@ export default function App() {
     };
   }, []);
 
-
-  const addToCart = (product) => {
-    setCart(prev => {
-      const existing = prev.find(item => item.id === product.id);
-      if (existing) {
-        return prev.map(item => item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item);
-      }
-      return [...prev, { ...product, quantity: 1 }];
+  const addToCollection = (product) => {
+    setCollection(prev => {
+      if (prev.find(item => item.id === product.id)) return prev;
+      return [...prev, product];
     });
-    setIsDrawerOpen(true);
+    setToastMessage(`Scent added to your collection`);
+    setTimeout(() => setToastMessage(null), 3000);
   };
 
-  const updateQuantity = (id, quantity) => {
-    if (quantity < 1) return removeFromCart(id);
-    setCart(prev => prev.map(item => item.id === id ? { ...item, quantity } : item));
-  };
-
-  const removeFromCart = (id) => {
-    setCart(prev => prev.filter(item => item.id !== id));
+  const removeFromCollection = (id) => {
+    setCollection(prev => prev.filter(item => item.id !== id));
   };
 
   return (
     <Router>
-      <Navbar cartCount={cart.reduce((s, i) => s + i.quantity, 0)} onCartClick={() => setIsDrawerOpen(true)} />
+      <Navbar collectionCount={collection.length} />
       
-      <CartDrawer 
-        isOpen={isDrawerOpen} 
-        onClose={() => setIsDrawerOpen(false)} 
-        cart={cart}
-        updateQuantity={updateQuantity}
-        removeFromCart={removeFromCart}
-      />
+      <Toast message={toastMessage} />
 
       <main>
         <Routes>
-          <Route path="/" element={<Home addToCart={addToCart} />} />
-          <Route path="/shop" element={<Shop addToCart={addToCart} />} />
-          <Route path="/product/:id" element={<ProductDetail addToCart={addToCart} />} />
+          <Route path="/" element={<Home addToCollection={addToCollection} />} />
+          <Route path="/shop" element={<Shop addToCollection={addToCollection} />} />
+          <Route path="/product/:id" element={<ProductDetail addToCollection={addToCollection} />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/quiz" element={<Quiz />} />
+          <Route path="/collection" element={<MyCollection collection={collection} removeFromCollection={removeFromCollection} />} />
         </Routes>
       </main>
       <Footer />
@@ -189,3 +203,4 @@ export default function App() {
   );
 }
 
+export default App;

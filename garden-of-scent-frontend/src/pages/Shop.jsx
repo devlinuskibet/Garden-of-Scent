@@ -2,13 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import ProductCard from '../components/ProductCard';
 
-const SCENT_FAMILIES = ['All', 'Floral', 'Woody', 'Fresh', 'Oriental', 'Citrus'];
-
-const Shop = ({ addToCart }) => {
+const Shop = ({ addToCollection }) => {
   const [products, setProducts] = useState([]);
   const [allProducts, setAllProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [activeFamily, setActiveFamily] = useState('All');
+  const [activeCategory, setActiveCategory] = useState('All');
+  const [activeSubBrand, setActiveSubBrand] = useState('All');
   const location = useLocation();
 
   useEffect(() => {
@@ -19,9 +18,13 @@ const Shop = ({ addToCart }) => {
         const res = await fetch(url);
         const data = await res.json();
         if (Array.isArray(data)) {
+          if (data.length === 0) {
+            console.log("Products from API:", data);
+          }
           setProducts(data);
           setAllProducts(data);
         } else {
+          console.log("Products from API:", data);
           setProducts([]);
           setAllProducts([]);
         }
@@ -36,12 +39,22 @@ const Shop = ({ addToCart }) => {
     fetchProducts();
   }, [location.search]);
 
-  const handleFamilyFilter = (family) => {
-    setActiveFamily(family);
-    if (family === 'All') {
+  const handleCategoryChange = (cat) => {
+    setActiveCategory(cat);
+    setActiveSubBrand('All');
+    if (cat === 'All') {
       setProducts(allProducts);
     } else {
-      setProducts(allProducts.filter(p => p.scent_family === family));
+      setProducts(allProducts.filter(p => p.category === cat));
+    }
+  };
+
+  const handleSubBrandChange = (brand) => {
+    setActiveSubBrand(brand);
+    if (brand === 'All') {
+      setProducts(allProducts.filter(p => p.category === 'Luxury Perfumes'));
+    } else {
+      setProducts(allProducts.filter(p => p.category === 'Luxury Perfumes' && p.brand?.toLowerCase() === brand.toLowerCase()));
     }
   };
 
@@ -61,7 +74,7 @@ const Shop = ({ addToCart }) => {
             The Collection
           </p>
           <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', marginBottom: '20px' }}>
-            {isFiltered ? 'Your Curated Selection' : 'The Boutique'}
+            {isFiltered ? 'Your Curated Selection' : 'Our Fragrance Collection'}
           </h1>
           <p style={{ opacity: 0.6, fontSize: '1rem', letterSpacing: '1px' }}>
             {isFiltered ? 'Fragrances matched to your olfactory profile' : 'Explore our complete botanical collection'}
@@ -72,25 +85,67 @@ const Shop = ({ addToCart }) => {
       <div className="container" style={{ paddingTop: '60px', paddingBottom: '100px' }}>
         {/* Category Filter Bar — only show when not from Scent Finder */}
         {!isFiltered && (
-          <div className="flex-center" style={{ gap: '15px', flexWrap: 'wrap', marginBottom: '60px' }}>
-            {SCENT_FAMILIES.map(family => (
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '30px', marginBottom: activeCategory === 'Luxury Perfumes' ? '20px' : '60px', flexWrap: 'wrap' }}>
+            {['All', 'Body Mists & Care', 'Luxury Perfumes'].map(cat => (
               <button
-                key={family}
-                onClick={() => handleFamilyFilter(family)}
+                key={cat}
+                onClick={() => handleCategoryChange(cat)}
                 style={{
-                  padding: '10px 24px',
-                  fontSize: '0.75rem',
-                  letterSpacing: '2px',
+                  background: 'none',
+                  border: 'none',
+                  borderBottom: activeCategory === cat ? '2px solid var(--secondary)' : '2px solid transparent',
+                  padding: '10px 0',
+                  color: activeCategory === cat ? 'var(--secondary)' : 'var(--text)',
                   textTransform: 'uppercase',
-                  border: activeFamily === family ? '1px solid var(--secondary)' : '1px solid var(--glass-border)',
-                  color: activeFamily === family ? '#000' : 'var(--text)',
-                  background: activeFamily === family ? 'var(--secondary)' : 'transparent',
+                  letterSpacing: '3px',
+                  fontSize: '0.9rem',
+                  fontWeight: activeCategory === cat ? 600 : 400,
+                  cursor: 'pointer',
+                  transition: 'all 0.3s ease'
+                }}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+        )}
+
+        {/* Sub Filter for Luxury Perfumes */}
+        {!isFiltered && activeCategory === 'Luxury Perfumes' && (
+          <div className="filter-container" style={{ 
+            display: 'flex', 
+            gap: '15px', 
+            marginBottom: '60px',
+            overflowX: 'auto',
+            whiteSpace: 'nowrap',
+            paddingBottom: '15px',
+            scrollbarWidth: 'thin',
+            scrollbarColor: 'var(--secondary) transparent'
+          }}>
+            <style>{`
+              .filter-container::-webkit-scrollbar { height: 2px; }
+              .filter-container::-webkit-scrollbar-track { background: transparent; }
+              .filter-container::-webkit-scrollbar-thumb { background: var(--secondary); }
+            `}</style>
+            {['All', ...new Set(allProducts.filter(p => p.category === 'Luxury Perfumes').map(p => p.brand).filter(Boolean))].map(brand => (
+              <button
+                key={brand}
+                onClick={() => handleSubBrandChange(brand)}
+                style={{
+                  padding: '6px 16px',
+                  fontSize: '0.7rem',
+                  letterSpacing: '1px',
+                  textTransform: 'uppercase',
+                  border: activeSubBrand === brand ? '1px solid var(--secondary)' : '1px solid var(--glass-border)',
+                  color: activeSubBrand === brand ? '#000' : 'var(--text)',
+                  background: activeSubBrand === brand ? 'var(--secondary)' : 'transparent',
                   cursor: 'pointer',
                   transition: 'all 0.3s ease',
                   borderRadius: '2px',
+                  flexShrink: 0
                 }}
               >
-                {family}
+                {brand}
               </button>
             ))}
           </div>
@@ -114,9 +169,9 @@ const Shop = ({ addToCart }) => {
             <a href="/shop" className="btn btn-outline">View All Scents</a>
           </div>
         ) : (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: '40px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: '40px' }}>
             {products.map(product => (
-              <ProductCard key={product.id} product={product} addToCart={addToCart} />
+              <ProductCard key={product.id} product={product} addToCollection={addToCollection} />
             ))}
           </div>
         )}

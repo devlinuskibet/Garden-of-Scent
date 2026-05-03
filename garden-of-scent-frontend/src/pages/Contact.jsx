@@ -68,7 +68,7 @@ const Contact = () => {
           <p style={{ color: 'var(--secondary)', letterSpacing: '4px', textTransform: 'uppercase', fontSize: '0.75rem', marginBottom: '15px' }}>
             Reach Out
           </p>
-          <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', marginBottom: '20px' }}>The Concierge</h1>
+          <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', marginBottom: '20px' }}>Talk to Us</h1>
           <p style={{ opacity: 0.6, maxWidth: '500px', margin: '0 auto', lineHeight: 1.8 }}>
             Our fragrance artisans are always available to guide you through your olfactory journey.
           </p>
@@ -183,7 +183,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <p style={{ color: 'var(--secondary)', fontSize: '0.7rem', letterSpacing: '3px', textTransform: 'uppercase', marginBottom: '4px' }}>Instant Connection</p>
-                    <h3 style={{ fontSize: '1.4rem', color: '#fff' }}>Chat with our Concierge</h3>
+                    <h3 style={{ fontSize: '1.4rem', color: '#fff' }}>Chat with us on WhatsApp</h3>
                   </div>
                 </div>
                 <p style={{ opacity: 0.75, lineHeight: 1.8, fontSize: '0.95rem' }}>
@@ -208,7 +208,7 @@ const Contact = () => {
             {/* Contact Details */}
             <div className="glass" style={{ padding: '40px', display: 'grid', gap: '30px' }}>
               <h3 style={{ fontSize: '1.2rem', marginBottom: '5px', borderBottom: '1px solid var(--glass-border)', paddingBottom: '15px' }}>
-                Visit Our Boutique
+                Visit Our Products
               </h3>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', opacity: 0.8 }}>
                 <div style={{ display: 'flex', gap: '15px', alignItems: 'flex-start' }}>

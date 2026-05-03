@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
+const seedProducts = require('./seedData');
 const db = new sqlite3.Database(path.join(__dirname, 'database.sqlite'));
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -25,6 +26,8 @@ db.serialize(() => {
   db.run(`CREATE TABLE IF NOT EXISTS products (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT,
+    brand TEXT,
+    category TEXT,
     price REAL,
     scent_family TEXT,
     top_notes TEXT,
@@ -49,24 +52,17 @@ db.serialize(() => {
   db.get("SELECT COUNT(*) as count FROM products", (err, row) => {
     if (row && row.count === 0) {
       const stmt = db.prepare(`INSERT INTO products 
-        (name, price, scent_family, top_notes, heart_notes, base_notes, vibe_tag, intensity, occasion, image_url, description) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`);
+        (name, brand, category, price, scent_family, top_notes, heart_notes, base_notes, vibe_tag, intensity, occasion, image_url, description) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`);
 
-      // FLORAL
-      stmt.run("Midnight Bloom", 185.00, "Floral", "Bergamot, Pink Pepper", "Damask Rose, Iris", "Oud, Patchouli, Vanilla", "Romantic", "Bold", "Evening", "https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&q=80&w=800", "A dark, sensual blend that captures the essence of a midnight garden.");
-      stmt.run("Rose Elixir", 165.00, "Floral", "Lychee, Peach", "Bulgarian Rose, Peony", "White Musk, Cedar", "Romantic", "Medium", "Date Night", "https://images.unsplash.com/photo-1615529162924-f8605388461d?auto=format&fit=crop&q=80&w=800", "A luminous, tender floral that blooms like a bouquet in the morning sun.");
-
-      // WOODY
-      stmt.run("Royal Oud", 210.00, "Woody", "Saffron, Nutmeg", "Agarwood (Oud), Leather", "Amber, Musk, Sandalwood", "Bold", "Strong", "Formal", "https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?auto=format&fit=crop&q=80&w=800", "An exotic, deeply resinous oriental fragrance for the sophisticated.");
-      stmt.run("Cedar Noir", 155.00, "Woody", "Black Pepper, Cardamom", "Vetiver, Cedarwood", "Tobacco, Dark Amber", "Bold", "Strong", "Evening", "https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&q=80&w=800", "A smoky, brooding cedar accord that commands every room it enters.");
-
-      // FRESH
-      stmt.run("Azure Mist", 145.00, "Fresh", "Sea Salt, Grapefruit", "Sage, Ambrette Seed", "Seaweed, Driftwood", "Minimalist", "Light", "Daily", "https://images.unsplash.com/photo-1615529182904-14819c35db37?auto=format&fit=crop&q=80&w=800", "Clean, airy, and revitalizing like a morning breeze by the ocean.");
-      stmt.run("Citrus Grove", 130.00, "Fresh", "Sicilian Lemon, Neroli", "Green Tea, Mint", "Vetiver, White Musk", "Minimalist", "Light", "Daily", "https://images.unsplash.com/photo-1549387219-75c78a4df365?auto=format&fit=crop&q=80&w=800", "A vivid burst of sunlit citrus groves and cooling green tea.");
-
-      // ORIENTAL
-      stmt.run("Velvet Amber", 165.00, "Oriental", "Cinnamon, Honey", "Amber, Labdanum", "Vanilla, Tonka Bean", "Warm", "Medium", "Date Night", "https://images.unsplash.com/photo-1608528577891-eb055944f2e7?auto=format&fit=crop&q=80&w=800", "A golden, glowing scent that wraps you in rich, balsamic warmth.");
-      stmt.run("Santal Mystique", 195.00, "Oriental", "Pink Pepper, Coriander", "Sandalwood, Rose Absolute", "Musk, Benzoin, Vanilla", "Warm", "Medium", "Formal", "https://images.unsplash.com/photo-1547826039-bfc35e0f1ea8?auto=format&fit=crop&q=80&w=800", "A creamy, woody oriental with a mystical sandalwood heart.");
+      seedProducts.forEach(product => {
+        stmt.run(
+          product.name, product.brand, product.category, product.price, 
+          product.scent_family, product.top_notes, product.heart_notes, 
+          product.base_notes, product.vibe_tag, product.intensity, 
+          product.occasion, product.image_url, product.description
+        );
+      });
 
       stmt.finalize();
     }
