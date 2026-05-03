@@ -137,9 +137,34 @@ const Footer = () => (
               <li><Link to="/contact">Talk to Us</Link></li>
             </ul>
           </div>
+          <div>
+            <h4 style={{ color: 'var(--secondary)', marginBottom: '15px', textTransform: 'uppercase', fontSize: '0.7rem', letterSpacing: '2px' }}>Popular Searches</h4>
+            <ul style={{ fontSize: '0.8rem', opacity: 0.5, lineHeight: 2.2, listStyle: 'none' }}>
+              <li>Original Perfumes Kenya</li>
+              <li>Luxury Fragrances Nairobi</li>
+              <li>Long Lasting Perfumes Kenya</li>
+              <li>Chanel Perfumes Kenya</li>
+              <li>Dior Sauvage Nairobi</li>
+              <li>Tom Ford Kenya</li>
+              <li>Oud Perfumes Nairobi</li>
+            </ul>
+          </div>
         </div>
       </div>
-      <p style={{ textAlign: 'center', opacity: 0.4, marginTop: '80px', fontSize: '0.8rem' }}>&copy; {new Date().getFullYear()} GARDEN OF SCENT. ALL RIGHTS RESERVED.</p>
+
+      {/* SEO Semantic Content Block */}
+      <article style={{ marginTop: '60px', padding: '30px', borderTop: '1px solid var(--glass-border)', opacity: 0.4, fontSize: '0.75rem', lineHeight: 1.8, maxWidth: '800px' }}>
+        <p>
+          Garden of Scent is Nairobi's premier boutique for original perfumes and luxury body care.
+          Whether you are looking for long-lasting designer scents, authentic Victoria's Secret mists in Kenya,
+          or the latest Arabian oud trends, our curated collection is designed for the sophisticated Kenyan shopper.
+          We stock original Chanel perfumes, Dior Sauvage, Tom Ford fragrances, and a wide range of fragrance mists
+          and body lotions in Kenya. Visit our fragrance garden and talk to our concierge today for delivery across Kenya.
+          Garden of Scent — the best scent shop in Kenya for authentic luxury fragrances in Nairobi and beyond.
+        </p>
+      </article>
+
+      <p style={{ textAlign: 'center', opacity: 0.4, marginTop: '40px', fontSize: '0.8rem' }}>&copy; {new Date().getFullYear()} GARDEN OF SCENT. ALL RIGHTS RESERVED.</p>
     </div>
   </footer>
 );

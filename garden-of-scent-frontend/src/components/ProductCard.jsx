@@ -26,7 +26,7 @@ const ProductCard = ({ product, addToCollection }) => {
       <div style={{ position: 'relative', overflow: 'hidden', height: '400px' }}>
         <img 
           src={displayImage} 
-          alt={product.name} 
+          alt={`${product.brand} ${product.name} - Original Perfume Kenya`} 
           style={{ 
             width: '100%', 
             height: '100%', 
