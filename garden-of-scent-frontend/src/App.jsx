@@ -78,7 +78,7 @@ const Navbar = ({ collectionCount }) => {
       WebkitBackdropFilter: 'blur(10px)'
     }}>
       <div className="container flex-between" style={{ height: '100%' }}>
-        <Link to="/" style={{ zIndex: 101, display: 'flex', alignItems: 'center', gap: '12px', textDecoration: 'none' }}>
+        <Link to="/" className="navbar-brand" style={{ zIndex: 101, display: 'flex', alignItems: 'center', gap: '12px', textDecoration: 'none' }}>
           <span className="brand-text" style={{ fontSize: '18px', fontFamily: 'var(--font-heading)', letterSpacing: '3px', color: 'var(--text)', whiteSpace: 'nowrap' }}>GARDEN OF SCENT</span>
           <img 
             src="/Garden Scents Luxury Minimalist Logo (4).jpg" 
@@ -136,7 +136,7 @@ const Navbar = ({ collectionCount }) => {
 const Footer = () => (
   <footer style={{ padding: '80px 0', borderTop: '1px solid var(--glass-border)', marginTop: '80px', background: '#080d0a' }}>
     <div className="container">
-      <div className="flex-between" style={{ flexWrap: 'wrap', gap: '40px' }}>
+      <div className="flex-between flex-responsive" style={{ flexWrap: 'wrap', gap: '40px', alignItems: 'flex-start' }}>
         <div style={{ maxWidth: '300px' }}>
           <img 
             src="/Garden Scents Luxury Minimalist Logo (4).jpg" 
@@ -155,7 +155,7 @@ const Footer = () => (
           <p style={{ opacity: 0.8, fontSize: '0.9rem', fontFamily: 'var(--font-heading)', letterSpacing: '1px' }}>Garden of Scent — Nairobi's Home of Original Fragrances.</p>
           <p style={{ opacity: 0.5, fontSize: '0.8rem', marginTop: '10px' }}>Crafting olfactory memories through the purest botanical extractions.</p>
         </div>
-        <div className="flex" style={{ gap: '60px', flexWrap: 'wrap' }}>
+        <div className="flex flex-responsive" style={{ gap: '60px', flexWrap: 'wrap' }}>
           <div>
             <h4 style={{ color: 'var(--secondary)', marginBottom: '15px', textTransform: 'uppercase', fontSize: '0.7rem', letterSpacing: '2px' }}>Explore</h4>
             <ul style={{ fontSize: '0.9rem', opacity: 0.8, lineHeight: 2.2, listStyle: 'none' }}>

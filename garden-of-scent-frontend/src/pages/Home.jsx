@@ -37,7 +37,7 @@ const Home = ({ addToCollection }) => {
         </div>
       </div>
 
-      <section className="container" style={{ padding: '120px 0' }}>
+      <section className="container section-padding">
         <div style={{ textAlign: 'center', marginBottom: '80px' }} className="reveal">
           <p style={{ color: 'var(--secondary)', letterSpacing: '4px', textTransform: 'uppercase', fontSize: '0.8rem', marginBottom: '15px' }}>
             The Essence of Nature
@@ -52,7 +52,7 @@ const Home = ({ addToCollection }) => {
         </div>
       </section>
 
-      <section className="glass reveal" style={{ margin: '0 40px', padding: '120px 0', textAlign: 'center' }}>
+      <section className="glass reveal section-padding" style={{ margin: '0 40px', textAlign: 'center' }}>
         <div className="container" style={{ maxWidth: '800px' }}>
           <h2 style={{ fontSize: '3rem', marginBottom: '30px', color: 'var(--secondary)' }}>Our Heritage</h2>
           <p style={{ fontSize: '1.2rem', opacity: 0.8, lineHeight: 2, marginBottom: '50px' }}>
@@ -64,7 +64,7 @@ const Home = ({ addToCollection }) => {
         </div>
       </section>
 
-      <section style={{ padding: '120px 0', textAlign: 'center' }} className="reveal">
+      <section className="reveal section-padding" style={{ textAlign: 'center' }}>
         <div className="container" style={{ maxWidth: '600px' }}>
           <h3 style={{ fontSize: '2rem', marginBottom: '40px' }}>Stay Enlightened</h3>
           <p style={{ opacity: 0.6, marginBottom: '40px' }}>Join our circle to receive exclusive releases and olfactory insights.</p>

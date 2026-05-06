@@ -83,6 +83,16 @@ a {
 .flex-center { display: flex; align-items: center; justify-content: center; }
 .flex-between { display: flex; align-items: center; justify-content: space-between; }
 
+/* Responsive Layout Utilities */
+.section-padding {
+  padding: 120px 0;
+}
+
+.flex-responsive {
+  display: flex;
+  gap: 40px;
+}
+
 /* Buttons */
 .btn {
   display: inline-flex;
@@ -97,6 +107,7 @@ a {
   position: relative;
   overflow: hidden;
   border-radius: 2px;
+  min-height: 48px; /* Mobile touch target */
 }
 
 .btn-primary {
@@ -265,15 +276,24 @@ a:hover { color: var(--secondary); }
   }
   
   .container {
-    padding: 0 20px;
+    padding: 0 16px;
   }
   
   h1 {
-    font-size: clamp(2rem, 8vw, 3rem) !important;
+    font-size: clamp(1.8rem, 6vw, 2.5rem) !important;
   }
   
   h2 {
-    font-size: clamp(1.5rem, 6vw, 2.5rem) !important;
+    font-size: clamp(1.5rem, 5vw, 2rem) !important;
+  }
+
+  .section-padding {
+    padding: 60px 0;
+  }
+
+  .flex-responsive {
+    flex-direction: column;
+    gap: 30px;
   }
 }
 
@@ -295,6 +315,12 @@ a:hover { color: var(--secondary); }
   font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 2px;
+}
+
+.nav-links a {
+  min-height: 48px; /* Mobile touch target */
+  display: flex;
+  align-items: center;
 }
 
 .hamburger {

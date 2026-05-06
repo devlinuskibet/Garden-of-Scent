@@ -75,8 +75,8 @@ const Contact = () => {
         </div>
       </header>
 
-      <div className="container" style={{ paddingTop: '80px', paddingBottom: '100px' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '80px', flexWrap: 'wrap' }}>
+      <div className="container section-padding">
+        <div className="contact-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '80px', flexWrap: 'wrap' }}>
 
           {/* Left: Contact Form */}
           <div>

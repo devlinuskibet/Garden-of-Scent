@@ -84,7 +84,7 @@ const About = () => {
       </section>
 
       {/* The Guarantee */}
-      <section style={{ padding: '120px 0', borderBottom: '1px solid var(--glass-border)' }}>
+      <section className="section-padding" style={{ borderBottom: '1px solid var(--glass-border)' }}>
         <div className="container" style={{ maxWidth: '900px', textAlign: 'center' }}>
           <div className="reveal">
             <div style={{
@@ -135,7 +135,7 @@ const About = () => {
       </section>
 
       {/* Sourcing Map — replaces Timeline */}
-      <section style={{ padding: '120px 0' }}>
+      <section className="section-padding">
         <div className="container">
           <div style={{ textAlign: 'center', marginBottom: '80px' }} className="reveal">
             <p style={{ color: 'var(--secondary)', letterSpacing: '4px', textTransform: 'uppercase', fontSize: '0.7rem', marginBottom: '15px' }}>
@@ -180,10 +180,9 @@ const About = () => {
       </section>
 
       {/* Founder CTA */}
-      <section style={{
+      <section className="section-padding" style={{
         background: 'rgba(31, 61, 43, 0.15)',
         borderTop: '1px solid var(--glass-border)',
-        padding: '100px 0',
         textAlign: 'center',
       }}>
         <div className="container reveal" style={{ maxWidth: '650px' }}>
