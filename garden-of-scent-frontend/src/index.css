@@ -120,6 +120,29 @@ a {
   color: #000;
 }
 
+/* Premium Glow Effects for Hero Buttons */
+.btn-glow {
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.15);
+}
+
+.btn-glow:hover {
+  box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
+}
+
+.btn-glow-outline {
+  border: 1px solid var(--secondary);
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.05) inset;
+  background: rgba(15, 26, 20, 0.4);
+  backdrop-filter: blur(4px);
+}
+
+.btn-glow-outline:hover {
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.2), 0 0 10px rgba(212, 175, 55, 0.2) inset;
+  border-color: #f0c94d;
+  background-color: transparent;
+  color: #f0c94d;
+}
+
 /* Specialized Components */
 .note-pyramid {
   display: flex;
@@ -384,3 +407,13 @@ img[src]:not([loading="lazy"]) {
 /* Sourcing card stagger */
 .glass.reveal:nth-child(2) { transition-delay: 0.15s; }
 .glass.reveal:nth-child(3) { transition-delay: 0.3s; }
+
+/* Hero PNG Animation */
+@keyframes subtleFloat {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+.hero-png {
+  animation: fadeIn 1.5s ease-out, subtleFloat 4s ease-in-out infinite;
+}
