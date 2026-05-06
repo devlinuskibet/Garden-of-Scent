@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 
 :root {
   --primary: #1F3D2B;     /* Forest Green */
@@ -6,7 +6,7 @@
   --background: #0F1A14;  /* Deep Charcoal */
   --text: #EAEAEA;        /* Off-white */
   --font-heading: 'Playfair Display', serif;
-  --font-body: 'Inter', sans-serif;
+  --font-body: 'Montserrat', sans-serif;
   --header-height: 80px;
   --glass-bg: rgba(255, 255, 255, 0.03);
   --glass-border: rgba(212, 175, 55, 0.15);
@@ -416,4 +416,28 @@ img[src]:not([loading="lazy"]) {
 }
 .hero-png {
   animation: fadeIn 1.5s ease-out, subtleFloat 4s ease-in-out infinite;
+}
+
+@keyframes slideUpFade {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Hero Mobile Polish --- */
+.hero-tagline {
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+}
+
+@media (max-width: 768px) {
+  .hero-tagline {
+    font-size: 1.8rem !important;
+  }
+  .hero-buttons {
+    flex-direction: column !important;
+    width: 100%;
+    padding: 0 20px;
+  }
+  .hero-buttons .btn {
+    width: 100%;
+  }
 }

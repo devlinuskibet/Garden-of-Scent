@@ -10,6 +10,21 @@ const Home = ({ addToCollection }) => {
     <div className="home-page">
       <HeroSection />
 
+      {/* The "Originality" Banner */}
+      <div style={{
+        background: 'var(--primary)',
+        color: '#fff',
+        padding: '15px 20px',
+        textAlign: 'center',
+        fontFamily: 'var(--font-body)',
+        fontSize: '0.75rem',
+        textTransform: 'uppercase',
+        letterSpacing: '0.3em',
+        borderBottom: '1px solid var(--glass-border)'
+      }}>
+        Experience the Purity of Original Global Brands. No Imitations. No Exceptions.
+      </div>
+
       <section className="container" style={{ padding: '120px 0' }}>
         <div style={{ textAlign: 'center', marginBottom: '80px' }} className="reveal">
           <p style={{ color: 'var(--secondary)', letterSpacing: '4px', textTransform: 'uppercase', fontSize: '0.8rem', marginBottom: '15px' }}>
