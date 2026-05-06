@@ -21,7 +21,11 @@ const ProductDetail = ({ addToCollection }) => {
             <img 
               src={product.image_url} 
               alt={`${product.brand} ${product.name} - Original Perfume Kenya`} 
-              style={{ width: '100%', height: '700px', objectFit: 'contain' }} 
+              loading="lazy"
+              decoding="async"
+              width="600"
+              height="700"
+              style={{ width: '100%', height: '700px', objectFit: 'contain', aspectRatio: '6 / 7' }} 
             />
           </div>
         </div>

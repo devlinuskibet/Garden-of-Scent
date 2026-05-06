@@ -339,30 +339,41 @@ a:hover { color: var(--secondary); }
   }
 }
 
-/* --- Image Fade-In on Scroll --- */
-img {
-  opacity: 0;
-  transition: opacity 0.8s ease, transform 0.8s ease;
+/* --- Image Performance & Fade-In --- */
+
+/* Product images: stable layout with aspect-ratio */
+.product-image {
+  aspect-ratio: 4 / 5;
+  object-fit: contain;
 }
 
-img.loaded,
-.reveal.active img,
-.glass img,
-nav img,
-footer img {
+/* Smooth fade-in for lazy-loaded images */
+img[loading="lazy"] {
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+img[loading="lazy"].loaded,
+.reveal.active img[loading="lazy"],
+.glass img[loading="lazy"] {
   opacity: 1;
 }
 
-/* Auto-load images visible in viewport */
-img[src] {
-  animation: imgFadeIn 0.8s ease forwards;
-  animation-delay: 0.1s;
+/* Auto-show all images once they have a src (prevents permanent invisibility) */
+img[src]:not([loading="lazy"]) {
+  opacity: 1;
+}
+
+/* Subtle entrance animation for product grid images */
+.product-grid img {
+  animation: imgFadeIn 0.6s ease forwards;
+  animation-delay: 0.15s;
 }
 
 @keyframes imgFadeIn {
   from {
     opacity: 0;
-    transform: scale(0.98);
+    transform: scale(0.97);
   }
   to {
     opacity: 1;

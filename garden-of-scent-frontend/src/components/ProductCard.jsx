@@ -25,12 +25,17 @@ const ProductCard = ({ product, addToCollection }) => {
         <img 
           src={product.image_url} 
           alt={`${product.brand} ${product.name} - Original Perfume Kenya`} 
+          loading="lazy"
+          decoding="async"
+          width="400"
+          height="500"
           style={{ 
             width: '100%', 
             height: '100%', 
             objectFit: 'contain', 
             transition: 'transform 0.8s cubic-bezier(0.19, 1, 0.22, 1)',
-            padding: '20px'
+            padding: '20px',
+            aspectRatio: '4 / 5'
           }}
           className="product-image"
         />
