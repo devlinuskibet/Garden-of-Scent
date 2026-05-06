@@ -10,19 +10,31 @@ const Home = ({ addToCollection }) => {
     <div className="home-page">
       <HeroSection />
 
-      {/* The "Originality" Banner */}
+      {/* The "Originality Guarantee" Banner */}
       <div style={{
         background: 'var(--primary)',
         color: '#fff',
-        padding: '15px 20px',
+        padding: '25px 20px',
         textAlign: 'center',
-        fontFamily: 'var(--font-body)',
-        fontSize: '0.75rem',
-        textTransform: 'uppercase',
-        letterSpacing: '0.3em',
         borderBottom: '1px solid var(--glass-border)'
       }}>
-        Experience the Purity of Original Global Brands. No Imitations. No Exceptions.
+        <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.3em', marginBottom: '15px' }}>
+          The Garden's Guarantee: Experience the Purity of Original Global Brands
+        </p>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '40px', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <span style={{ color: 'var(--secondary)', fontSize: '1.2rem' }}>✦</span>
+            <span style={{ fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.15em', opacity: 0.8 }}>100% Authentic</span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <span style={{ color: 'var(--secondary)', fontSize: '1.2rem' }}>✦</span>
+            <span style={{ fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.15em', opacity: 0.8 }}>No Imitations</span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <span style={{ color: 'var(--secondary)', fontSize: '1.2rem' }}>✦</span>
+            <span style={{ fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.15em', opacity: 0.8 }}>No Exceptions</span>
+          </div>
+        </div>
       </div>
 
       <section className="container" style={{ padding: '120px 0' }}>

@@ -432,6 +432,10 @@ img[src]:not([loading="lazy"]) {
   .hero-tagline {
     font-size: 1.8rem !important;
   }
+  .hero-subheading {
+    font-size: 0.9rem !important;
+    letter-spacing: 0.1em !important;
+  }
   .hero-buttons {
     flex-direction: column !important;
     width: 100%;
@@ -439,5 +443,11 @@ img[src]:not([loading="lazy"]) {
   }
   .hero-buttons .btn {
     width: 100%;
+  }
+  .brand-text {
+    font-size: 1.2rem !important;
+  }
+  .collection-text {
+    display: none;
   }
 }

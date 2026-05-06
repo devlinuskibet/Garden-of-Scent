@@ -37,6 +37,15 @@ const HeroSection = () => {
         }}
       />
 
+      {/* Vignette Overlay */}
+      <div style={{
+        position: 'absolute',
+        inset: 0,
+        background: 'radial-gradient(circle at center, transparent 40%, rgba(15,26,20,0.8) 100%)',
+        zIndex: 2,
+        pointerEvents: 'none',
+      }} />
+
       {/* Typography Block */}
       <div
         style={{
@@ -67,6 +76,7 @@ const HeroSection = () => {
 
         {/* Layer 2: Secondary Subheading */}
         <p
+          className="hero-subheading"
           style={{
             color: '#FFFFFF',
             fontFamily: 'var(--font-body)',
