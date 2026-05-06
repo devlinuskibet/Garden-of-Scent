@@ -10,10 +10,8 @@ const ProductCard = ({ product, addToCollection }) => {
     setAdded(true);
     setTimeout(() => setAdded(false), 2000);
   };
-  const isLuxury = product.category === 'Luxury Perfumes';
-  const noteSnippet = isLuxury ? 'Oriental Floral' : 'Sweet & Fruity';
-  const whatsappUrl = `https://wa.me/254790147780?text=${encodeURIComponent(`I am interested in ${product.name} by ${product.brand}. Is it available?`)}`;
-  const displayImage = isLuxury ? '/assets/perfume_placeholder.png' : '/assets/mist_placeholder.png';
+  const noteSnippet = product.scent_family || 'Premium Fragrance';
+  const whatsappUrl = `https://wa.me/254790147780?text=${encodeURIComponent(`Hi! I am interested in ${product.name} by ${product.brand} (KSh ${product.price.toLocaleString()}). Is it available?`)}`;
 
   return (
     <div className="glass reveal" style={{ 
@@ -23,16 +21,16 @@ const ProductCard = ({ product, addToCollection }) => {
       display: 'flex',
       flexDirection: 'column'
     }}>
-      <div style={{ position: 'relative', overflow: 'hidden', height: '400px' }}>
+      <div style={{ position: 'relative', overflow: 'hidden', height: '400px', background: '#f5f0ea' }}>
         <img 
-          src={displayImage} 
+          src={product.image_url} 
           alt={`${product.brand} ${product.name} - Original Perfume Kenya`} 
           style={{ 
             width: '100%', 
             height: '100%', 
-            objectFit: 'cover', 
+            objectFit: 'contain', 
             transition: 'transform 0.8s cubic-bezier(0.19, 1, 0.22, 1)',
-            filter: `hue-rotate(${product.id * 15}deg)`
+            padding: '20px'
           }}
           className="product-image"
         />

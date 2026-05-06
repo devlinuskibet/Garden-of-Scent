@@ -329,4 +329,47 @@ a:hover { color: var(--secondary); }
   .hamburger.open span:nth-child(3) {
     transform: translateY(-8px) rotate(-45deg);
   }
+
+  /* Center logo on mobile */
+  .navbar-brand {
+    font-size: 14px !important;
+  }
+  .navbar-brand img {
+    height: 40px !important;
+  }
 }
+
+/* --- Image Fade-In on Scroll --- */
+img {
+  opacity: 0;
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+img.loaded,
+.reveal.active img,
+.glass img,
+nav img,
+footer img {
+  opacity: 1;
+}
+
+/* Auto-load images visible in viewport */
+img[src] {
+  animation: imgFadeIn 0.8s ease forwards;
+  animation-delay: 0.1s;
+}
+
+@keyframes imgFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Sourcing card stagger */
+.glass.reveal:nth-child(2) { transition-delay: 0.15s; }
+.glass.reveal:nth-child(3) { transition-delay: 0.3s; }

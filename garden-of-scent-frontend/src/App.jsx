@@ -78,7 +78,21 @@ const Navbar = ({ collectionCount }) => {
       WebkitBackdropFilter: 'blur(10px)'
     }}>
       <div className="container flex-between" style={{ height: '100%' }}>
-        <Link to="/" style={{ fontSize: '24px', fontFamily: 'var(--font-heading)', letterSpacing: '2px', zIndex: 101 }}>GARDEN OF SCENT</Link>
+        <Link to="/" style={{ zIndex: 101, display: 'flex', alignItems: 'center', gap: '12px', textDecoration: 'none' }}>
+          <span style={{ fontSize: '18px', fontFamily: 'var(--font-heading)', letterSpacing: '3px', color: 'var(--text)', whiteSpace: 'nowrap' }}>GARDEN OF SCENT</span>
+          <img 
+            src="/Garden Scents Luxury Minimalist Logo (4).jpg" 
+            alt="Garden of Scent Luxury Minimalist Logo - Original Perfumes Kenya" 
+            style={{ 
+              height: '55px', 
+              objectFit: 'contain', 
+              borderRadius: '4px', 
+              border: '1px solid var(--secondary)',
+              padding: '2px',
+              background: 'rgba(0,0,0,0.3)'
+            }} 
+          />
+        </Link>
         
         <ul className={`nav-links ${isMenuOpen ? 'open' : ''}`}>
           <li><Link to="/shop" onClick={() => setIsMenuOpen(false)}>Our Products</Link></li>
@@ -124,8 +138,22 @@ const Footer = () => (
     <div className="container">
       <div className="flex-between" style={{ flexWrap: 'wrap', gap: '40px' }}>
         <div style={{ maxWidth: '300px' }}>
-          <h2 style={{ fontFamily: 'var(--font-heading)', marginBottom: '20px' }}>Garden of Scent</h2>
-          <p style={{ opacity: 0.6, fontSize: '0.9rem' }}>Crafting olfactory memories through the purest botanical extractions.</p>
+          <img 
+            src="/Garden Scents Luxury Minimalist Logo (4).jpg" 
+            alt="Garden of Scent Luxury Minimalist Logo - Original Perfumes Kenya" 
+            style={{ 
+              height: '80px', 
+              objectFit: 'contain', 
+              borderRadius: '6px',
+              border: '1px solid var(--secondary)',
+              padding: '3px',
+              background: 'rgba(0,0,0,0.3)',
+              marginBottom: '20px',
+              display: 'block'
+            }} 
+          />
+          <p style={{ opacity: 0.8, fontSize: '0.9rem', fontFamily: 'var(--font-heading)', letterSpacing: '1px' }}>Garden of Scent — Nairobi's Home of Original Fragrances.</p>
+          <p style={{ opacity: 0.5, fontSize: '0.8rem', marginTop: '10px' }}>Crafting olfactory memories through the purest botanical extractions.</p>
         </div>
         <div className="flex" style={{ gap: '60px', flexWrap: 'wrap' }}>
           <div>
@@ -234,7 +262,7 @@ function App() {
           <Route path="/product/:id" element={<ProductDetail addToCollection={addToCollection} />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/quiz" element={<Quiz />} />
+          <Route path="/quiz" element={<Quiz addToCollection={addToCollection} />} />
           <Route path="/collection" element={<MyCollection collection={collection} removeFromCollection={removeFromCollection} />} />
         </Routes>
       </main>

@@ -80,7 +80,7 @@ const Shop = ({ addToCollection }) => {
         {/* Category Filter Bar — only show when not from Scent Finder */}
         {!isFiltered && (
           <div style={{ display: 'flex', justifyContent: 'center', gap: '30px', marginBottom: activeCategory === 'Luxury Perfumes' ? '20px' : '60px', flexWrap: 'wrap' }}>
-            {['All', 'Body Mists & Care', 'Luxury Perfumes'].map(cat => (
+            {['All', 'Luxury Perfumes', 'Body Care'].map(cat => (
               <button
                 key={cat}
                 onClick={() => handleCategoryChange(cat)}

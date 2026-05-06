@@ -17,11 +17,11 @@ const ProductDetail = ({ addToCollection }) => {
       
       <div style={{ display: 'flex', gap: '80px', flexWrap: 'wrap', alignItems: 'flex-start' }}>
         <div style={{ flex: '1 1 500px', position: 'relative' }}>
-          <div className="glass" style={{ padding: '10px' }}>
+          <div className="glass" style={{ padding: '20px', background: '#f5f0ea' }}>
             <img 
               src={product.image_url} 
-              alt={product.name} 
-              style={{ width: '100%', height: '700px', objectFit: 'cover' }} 
+              alt={`${product.brand} ${product.name} - Original Perfume Kenya`} 
+              style={{ width: '100%', height: '700px', objectFit: 'contain' }} 
             />
           </div>
         </div>
@@ -31,7 +31,7 @@ const ProductDetail = ({ addToCollection }) => {
             {product.scent_family} &bull; {product.intensity}
           </p>
           <h1 style={{ fontSize: '4rem', marginBottom: '10px' }}>{product.name}</h1>
-          <p style={{ fontSize: '1.8rem', color: 'var(--secondary)', marginBottom: '40px' }}>KSh {product.price.toFixed(2)}</p>
+          <p style={{ fontSize: '1.8rem', color: 'var(--secondary)', marginBottom: '40px' }}>KSh {product.price.toLocaleString()}</p>
           
           <p style={{ opacity: 0.8, fontSize: '1.2rem', marginBottom: '50px', lineHeight: 1.8, maxWidth: '600px' }}>
             {product.description}
