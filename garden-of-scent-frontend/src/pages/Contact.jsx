@@ -6,7 +6,7 @@ const WhatsAppIcon = () => (
   </svg>
 );
 
-const WHATSAPP_LINK = "https://wa.me/254790147780?text=Hello%2C%20I%27d%20like%20to%20learn%20more%20about%20your%20fragrances%20at%20Garden%20of%20Scent.";
+const WHATSAPP_LINK = "https://wa.me/254790147780?text=Hello%20Garden%20of%20Scents%2C%20I%20would%20like%20to%20learn%20more%20about%20your%20fragrances.";
 
 const inputStyle = {
   width: '100%',

@@ -11,7 +11,9 @@ const ProductCard = ({ product, addToCollection }) => {
     setTimeout(() => setAdded(false), 2000);
   };
   const noteSnippet = product.scent_family || 'Premium Fragrance';
-  const whatsappUrl = `https://wa.me/254790147780?text=${encodeURIComponent(`Hi! I am interested in ${product.name} by ${product.brand} (KSh ${product.price.toLocaleString()}). Is it available?`)}`;
+  const whatsappUrl = `https://wa.me/254790147780?text=${encodeURIComponent(`Hello Garden of Scents, I am interested in ${product.name} (KSh ${product.price.toLocaleString()}). Is this currently in stock?`)}`;
+
+  const isPlaceholder = product.image_url?.includes('BBW-placeholder');
 
   return (
     <div className="glass reveal" style={{ 
@@ -32,9 +34,9 @@ const ProductCard = ({ product, addToCollection }) => {
           style={{ 
             width: '100%', 
             height: '100%', 
-            objectFit: 'contain', 
+            objectFit: isPlaceholder ? 'cover' : 'contain', 
             transition: 'transform 0.8s cubic-bezier(0.19, 1, 0.22, 1)',
-            padding: '20px',
+            padding: isPlaceholder ? '0' : '20px',
             aspectRatio: '4 / 5'
           }}
           className="product-image"
@@ -152,7 +154,6 @@ const ProductCard = ({ product, addToCollection }) => {
         .glass:hover .product-image {
           transform: scale(1.1);
         }
-
       `}</style>
     </div>
   );

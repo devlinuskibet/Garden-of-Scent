@@ -477,3 +477,44 @@ img[src]:not([loading="lazy"]) {
     display: none;
   }
 }
+
+/* --- Category Filter Bar Mobile --- */
+@media (max-width: 768px) {
+  .category-filter-bar {
+    flex-wrap: nowrap !important;
+    justify-content: flex-start !important;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 0 16px !important;
+    gap: 12px !important;
+  }
+  .category-filter-bar::-webkit-scrollbar {
+    display: none;
+  }
+  .category-filter-bar button {
+    flex-shrink: 0;
+    white-space: nowrap;
+    font-size: 0.75rem !important;
+    padding: 8px 4px !important;
+    letter-spacing: 1.5px !important;
+  }
+}
+
+/* --- Product Card Text Wrapping --- */
+.glass h3 {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  line-height: 1.3;
+}
+
+@media (max-width: 768px) {
+  .glass h3 {
+    font-size: 1.1rem !important;
+    padding: 0 4px;
+  }
+  .glass > div:last-of-type {
+    padding: 16px 12px !important;
+  }
+}

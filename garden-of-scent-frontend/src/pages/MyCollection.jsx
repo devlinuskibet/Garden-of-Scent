@@ -3,7 +3,7 @@ import ProductCard from '../components/ProductCard';
 
 const MyCollection = ({ collection, removeFromCollection }) => {
   const generateWhatsAppUrl = () => {
-    let message = `Hello! I have curated my collection at Garden of Scent. I am interested in:\n`;
+    let message = `Hello Garden of Scents! I have curated my collection and I am interested in:\n`;
     collection.forEach((item, index) => {
       message += `${index + 1}. ${item.name} by ${item.brand}\n`;
     });

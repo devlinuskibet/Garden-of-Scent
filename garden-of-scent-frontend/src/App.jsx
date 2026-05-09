@@ -9,7 +9,7 @@ import Contact from './pages/Contact';
 import Quiz from './pages/Quiz';
 import MyCollection from './pages/MyCollection';
 
-const WHATSAPP_LINK = "https://wa.me/254790147780?text=Hello%2C%20what%20perfume%20are%20you%20looking%20for%20today%3F";
+const WHATSAPP_LINK = "https://wa.me/254790147780?text=Hello%20Garden%20of%20Scents%2C%20I%20would%20like%20to%20inquire%20about%20your%20products.";
 
 const WhatsAppFAB = () => (
   <a
