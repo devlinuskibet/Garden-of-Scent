@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useForm, ValidationError } from '@formspree/react';
 
 const WhatsAppIcon = () => (
   <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -41,7 +42,6 @@ const MapPinIcon = () => (
 
 const WHATSAPP_LINK = "https://wa.me/254790147780?text=Hello%20Garden%20of%20Scents%2C%20I%20would%20like%20to%20learn%20more%20about%20your%20fragrances.";
 const GOOGLE_MAPS_LINK = "https://www.google.com/maps/search/Imenti+House,+Tom+Mboya+St,+Nairobi";
-const FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID"; // TODO: Replace YOUR_FORM_ID with your Formspree form ID
 const MAPS_EMBED_URL = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.819073085557!2d36.82194!3d-1.28333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f10d22ba7b5b1%3A0x4c3b7be1e6ef6e1!2sImenti%20House%2C%20Tom%20Mboya%20St%2C%20Nairobi!5e0!3m2!1sen!2ske!4v1699900000000!5m2!1sen!2ske";
 
 const inputStyle = {
@@ -67,39 +67,7 @@ const labelStyle = {
 };
 
 const Contact = () => {
-  const [form, setForm] = useState({ 'full-name': '', email: '', message: '' });
-  const [status, setStatus] = useState('idle'); // idle | sending | success | error
-
-  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setStatus('sending');
-    try {
-      const res = await fetch(FORMSPREE_ENDPOINT, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-        body: JSON.stringify(form),
-      });
-      if (res.ok) {
-        setStatus('success');
-        setForm({ 'full-name': '', email: '', message: '' });
-      } else {
-        setStatus('error');
-      }
-    } catch (err) {
-      console.error(err);
-      setStatus('error');
-    }
-  };
-
-  const handleReset = () => {
-    setStatus('idle');
-    setForm({ 'full-name': '', email: '', message: '' });
-  };
+  const [state, handleSubmit] = useForm('mrejjaoy');
 
   return (
     <div style={{ paddingTop: 'var(--header-height)', minHeight: '100vh' }}>
@@ -215,7 +183,7 @@ const Contact = () => {
               Inquire about a fragrance, a bespoke commission, or a bulk order for your special occasion.
             </p>
 
-            {status === 'success' ? (
+            {state.succeeded ? (
               <div className="glass" style={{ padding: '50px', textAlign: 'center' }}>
                 <div style={{ fontSize: '2.5rem', marginBottom: '20px' }}>✦</div>
                 <h3 style={{ color: 'var(--secondary)', fontSize: '1.8rem', marginBottom: '15px' }}>Message Received</h3>
@@ -223,7 +191,7 @@ const Contact = () => {
                   A fragrance artisan from Garden of Scent will reach out to you within 24 hours.
                 </p>
                 <button
-                  onClick={handleReset}
+                  onClick={() => window.location.reload()}
                   className="btn btn-outline"
                   style={{ fontSize: '0.8rem', letterSpacing: '2px' }}
                 >
@@ -232,29 +200,17 @@ const Contact = () => {
               </div>
             ) : (
               <form onSubmit={handleSubmit} style={{ display: 'grid', gap: '30px' }}>
-                {status === 'error' && (
-                  <div style={{
-                    padding: '14px 20px',
-                    background: 'rgba(220, 80, 80, 0.1)',
-                    border: '1px solid rgba(220, 80, 80, 0.3)',
-                    borderRadius: '4px',
-                    color: '#e8a0a0',
-                    fontSize: '0.9rem',
-                    lineHeight: 1.6,
-                  }}>
-                    Something went wrong. Please try again or reach us via WhatsApp.
-                  </div>
-                )}
                 <div>
                   <label style={labelStyle}>Full Name</label>
                   <input
                     type="text"
                     name="full-name"
-                    value={form['full-name']}
-                    onChange={handleChange}
                     required
                     placeholder="Your name"
                     style={inputStyle}
+                  />
+                  <ValidationError prefix="Name" field="full-name" errors={state.errors}
+                    style={{ color: '#e8a0a0', fontSize: '0.8rem', marginTop: '6px', display: 'block' }}
                   />
                 </div>
                 <div>
@@ -262,23 +218,25 @@ const Contact = () => {
                   <input
                     type="email"
                     name="email"
-                    value={form.email}
-                    onChange={handleChange}
                     required
                     placeholder="your@email.com"
                     style={inputStyle}
+                  />
+                  <ValidationError prefix="Email" field="email" errors={state.errors}
+                    style={{ color: '#e8a0a0', fontSize: '0.8rem', marginTop: '6px', display: 'block' }}
                   />
                 </div>
                 <div>
                   <label style={labelStyle}>Your Message</label>
                   <textarea
                     name="message"
-                    value={form.message}
-                    onChange={handleChange}
                     required
                     rows="6"
                     placeholder="Tell us about your fragrance needs..."
                     style={{ ...inputStyle, resize: 'vertical' }}
+                  />
+                  <ValidationError prefix="Message" field="message" errors={state.errors}
+                    style={{ color: '#e8a0a0', fontSize: '0.8rem', marginTop: '6px', display: 'block' }}
                   />
                 </div>
                 <button
@@ -288,12 +246,12 @@ const Contact = () => {
                     padding: '18px',
                     fontSize: '0.85rem',
                     letterSpacing: '2px',
-                    opacity: status === 'sending' ? 0.7 : 1,
-                    cursor: status === 'sending' ? 'not-allowed' : 'pointer',
+                    opacity: state.submitting ? 0.7 : 1,
+                    cursor: state.submitting ? 'not-allowed' : 'pointer',
                   }}
-                  disabled={status === 'sending'}
+                  disabled={state.submitting}
                 >
-                  {status === 'sending' ? 'Sending...' : 'Send Message'}
+                  {state.submitting ? 'Sending...' : 'Send Message'}
                 </button>
               </form>
             )}
