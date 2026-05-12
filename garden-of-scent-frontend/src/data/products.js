@@ -482,7 +482,7 @@ export const products = [
     intensity: "Strong",
     occasion: "Evening",
     description: "A dramatically glamorous mist with dark berries, midnight peony, and rich amber — for nights that demand to be remembered.",
-    image_url: "/assets/BBW-placeholder.png"
+    image_url: "/assets/B&BW-Into the night.jpeg"
   },
   {
     id: 31,
@@ -498,7 +498,7 @@ export const products = [
     intensity: "Medium",
     occasion: "Evening",
     description: "A celestial blend of sparkling starlit blooms and frosted lavender, wrapped in warm sandalwood musk — like bottled stardust.",
-    image_url: "/assets/BBW-placeholder.png"
+    image_url: "/assets/B&BW-In the stars.jpeg"
   },
   {
     id: 32,
@@ -514,7 +514,7 @@ export const products = [
     intensity: "Medium",
     occasion: "Daily",
     description: "A sophisticated and modern mist with velvety rose and suede musk — confident, chic, and unmistakably you.",
-    image_url: "/assets/BBW-placeholder.png"
+    image_url: "/assets/B&BW-You're the one.jpeg"
   },
   {
     id: 33,
@@ -530,7 +530,7 @@ export const products = [
     intensity: "Medium",
     occasion: "Date Night",
     description: "A passionate blend of pomegranate and rare peach, finished with rich vanilla rum for a sophisticated, fiery signature.",
-    image_url: "/assets/BBW-placeholder.png"
+    image_url: "/assets/B&BW-Forever Red.jpeg"
   },
   {
     id: 34,
@@ -546,7 +546,7 @@ export const products = [
     intensity: "Medium",
     occasion: "Special",
     description: "A celebratory burst of pink prosecco and sparkling quince wrapped in gilded amber — pop the cork and make a wish.",
-    image_url: "/assets/BBW-placeholder.png"
+    image_url: "/assets/B&BW-A thousand wishes.jpeg"
   },
   {
     id: 35,
@@ -562,7 +562,7 @@ export const products = [
     intensity: "Light",
     occasion: "Special",
     description: "Raise a glass with this effervescent mist of bubbly champagne and sparkling berries — festive, flirty, and fabulous.",
-    image_url: "/assets/BBW-placeholder.png"
+    image_url: "/assets/B&BW-Champagne toast.jpeg"
   },
   {
     id: 36,
@@ -578,7 +578,7 @@ export const products = [
     intensity: "Medium",
     occasion: "Daily",
     description: "A dreamy, warm, and joyfully bright blend of iced rosé and star jasmine — pure wonder in a bottle.",
-    image_url: "/assets/BBW-placeholder.png"
+    image_url: "/assets/B&BW-Pure wonder.jpeg"
   },
   {
     id: 37,
@@ -594,7 +594,7 @@ export const products = [
     intensity: "Light",
     occasion: "Daily",
     description: "Bright, sunny, and happy — Gingham captures the joyful feeling of a perfect spring morning with blue freesia and sweet clover.",
-    image_url: "/assets/BBW-placeholder.png"
+    image_url: "/assets/B&BW-Gingham love.jpeg"
   },
   {
     id: 38,
@@ -610,7 +610,7 @@ export const products = [
     intensity: "Medium",
     occasion: "Daily",
     description: "The ultimate comfort scent — rich vanilla, warm sugar, and a touch of jasmine create a cozy, irresistible glow.",
-    image_url: "/assets/BBW-placeholder.png"
+    image_url: "/assets/B&BW-Warm vanilla sugar.jpeg"
   },
   {
     id: 39,
@@ -626,7 +626,7 @@ export const products = [
     intensity: "Medium",
     occasion: "Daily",
     description: "A vibrant and addictive blend of wild berries and pink pear, finished with a sweet marshmallow musk.",
-    image_url: "/assets/BBW-placeholder.png"
+    image_url: "/assets/B&BW-Pink obsessed.jpeg"
   },
   {
     id: 40,
@@ -642,7 +642,7 @@ export const products = [
     intensity: "Strong",
     occasion: "Night",
     description: "A deep and enigmatic fragrance with dark cherry and smoky vanilla — a seductive addiction for the midnight hours.",
-    image_url: "/assets/BBW-placeholder.png"
+    image_url: "/assets/B&BW-Midnight addiction.jpeg"
   },
   {
     id: 41,
@@ -658,7 +658,7 @@ export const products = [
     intensity: "Light",
     occasion: "Daily",
     description: "The iconic B&BW classic — delicate cherry blossom meets fresh pear and soft vanilla for a universally adored scent.",
-    image_url: "/assets/BBW-placeholder.png"
+    image_url: "/assets/B&BW-Japanese cherry blossom.jpeg"
   },
   {
     id: 42,
@@ -674,7 +674,7 @@ export const products = [
     intensity: "Strong",
     occasion: "Night",
     description: "A dangerously seductive mist with dark berries and black orchid layered over smoldering vanilla — darkly irresistible.",
-    image_url: "/assets/BBW-placeholder.png"
+    image_url: "/assets/B&BW-Dark kiss.jpeg"
   },
   {
     id: 43,
@@ -690,7 +690,7 @@ export const products = [
     intensity: "Medium",
     occasion: "Evening",
     description: "A radiant and bold blend of sapphire berries and night-blooming orchid, finished with a touch of crystalized vanilla.",
-    image_url: "/assets/BBW-placeholder.png"
+    image_url: "/assets/B&BW-Dream bright.jpeg"
   },
   {
     id: 44,
@@ -706,7 +706,7 @@ export const products = [
     intensity: "Medium",
     occasion: "Daily",
     description: "A whimsical and magical blend of pomegranate nectar and orange blossom, wrapped in a warm vanilla amber fairytale.",
-    image_url: "/assets/BBW-placeholder.png"
+    image_url: "/assets/B&BW-Fairytale.jpeg"
   }
 
 ];

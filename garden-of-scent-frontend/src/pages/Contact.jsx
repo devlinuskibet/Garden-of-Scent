@@ -6,7 +6,42 @@ const WhatsAppIcon = () => (
   </svg>
 );
 
+const LocationIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+    <circle cx="12" cy="10" r="3"/>
+  </svg>
+);
+
+const EmailIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="2" y="4" width="20" height="16" rx="2"/>
+    <path d="M22 7l-10 7L2 7"/>
+  </svg>
+);
+
+const PhoneIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+  </svg>
+);
+
+const ClockIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="12" r="10"/>
+    <polyline points="12 6 12 12 16 14"/>
+  </svg>
+);
+
+const MapPinIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <polygon points="3 11 22 2 13 21 11 13 3 11"/>
+  </svg>
+);
+
 const WHATSAPP_LINK = "https://wa.me/254790147780?text=Hello%20Garden%20of%20Scents%2C%20I%20would%20like%20to%20learn%20more%20about%20your%20fragrances.";
+const GOOGLE_MAPS_LINK = "https://www.google.com/maps/search/Imenti+House,+Tom+Mboya+St,+Nairobi";
+const MAPS_EMBED_URL = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.819073085557!2d36.82194!3d-1.28333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f10d22ba7b5b1%3A0x4c3b7be1e6ef6e1!2sImenti%20House%2C%20Tom%20Mboya%20St%2C%20Nairobi!5e0!3m2!1sen!2ske!4v1699900000000!5m2!1sen!2ske";
 
 const inputStyle = {
   width: '100%',
@@ -76,7 +111,91 @@ const Contact = () => {
       </header>
 
       <div className="container section-padding">
-        <div className="contact-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '80px', flexWrap: 'wrap' }}>
+
+        {/* ═══ Contact Info + Map Row ═══ */}
+        <div className="contact-info-map-row">
+
+          {/* Contact Details Card */}
+          <div className="glass contact-details-card" style={{ padding: '40px', display: 'grid', gap: '28px' }}>
+            <h3 style={{ fontSize: '1.3rem', marginBottom: '5px', borderBottom: '1px solid var(--glass-border)', paddingBottom: '15px' }}>
+              Visit Our Store
+            </h3>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '22px' }}>
+
+              {/* Location */}
+              <div style={{ display: 'flex', gap: '15px', alignItems: 'flex-start' }}>
+                <div style={{ color: 'var(--secondary)', marginTop: '2px', flexShrink: 0 }}>
+                  <LocationIcon />
+                </div>
+                <div>
+                  <p style={{ fontSize: '0.75rem', letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--secondary)', marginBottom: '5px' }}>Location</p>
+                  <p style={{ lineHeight: 1.6, opacity: 0.85 }}>Imenti House, B50 – Wasafi Entrance<br/>Tom Mboya St, Nairobi, Kenya</p>
+                </div>
+              </div>
+
+              {/* Email */}
+              <div style={{ display: 'flex', gap: '15px', alignItems: 'flex-start' }}>
+                <div style={{ color: 'var(--secondary)', marginTop: '2px', flexShrink: 0 }}>
+                  <EmailIcon />
+                </div>
+                <div>
+                  <p style={{ fontSize: '0.75rem', letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--secondary)', marginBottom: '5px' }}>Email</p>
+                  <a href="mailto:evelumbi22@gmail.com" style={{ opacity: 0.85, transition: 'color 0.3s ease' }}>evelumbi22@gmail.com</a>
+                </div>
+              </div>
+
+              {/* Phone */}
+              <div style={{ display: 'flex', gap: '15px', alignItems: 'flex-start' }}>
+                <div style={{ color: 'var(--secondary)', marginTop: '2px', flexShrink: 0 }}>
+                  <PhoneIcon />
+                </div>
+                <div>
+                  <p style={{ fontSize: '0.75rem', letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--secondary)', marginBottom: '5px' }}>WhatsApp / Phone</p>
+                  <p style={{ opacity: 0.85 }}>+254 790 147 780</p>
+                </div>
+              </div>
+
+              {/* Hours */}
+              <div style={{ display: 'flex', gap: '15px', alignItems: 'flex-start' }}>
+                <div style={{ color: 'var(--secondary)', marginTop: '2px', flexShrink: 0 }}>
+                  <ClockIcon />
+                </div>
+                <div>
+                  <p style={{ fontSize: '0.75rem', letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--secondary)', marginBottom: '5px' }}>Hours</p>
+                  <p style={{ lineHeight: 1.6, opacity: 0.85 }}>Mon – Sat: 9am – 7pm<br/>Sunday: 11am – 5pm</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Google Maps Embed */}
+          <div className="contact-map-container">
+            <div className="contact-map-wrapper">
+              <iframe
+                title="Garden of Scent Location – Imenti House, Nairobi"
+                src={MAPS_EMBED_URL}
+                width="100%"
+                height="100%"
+                style={{ border: 0, borderRadius: '12px' }}
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
+            <a
+              href={GOOGLE_MAPS_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="open-maps-btn"
+            >
+              <MapPinIcon />
+              <span>Open in Google Maps</span>
+            </a>
+          </div>
+        </div>
+
+        {/* ═══ Main Content Grid: Form + WhatsApp ═══ */}
+        <div className="contact-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '80px', marginTop: '80px' }}>
 
           {/* Left: Contact Form */}
           <div>
@@ -143,10 +262,8 @@ const Contact = () => {
             )}
           </div>
 
-          {/* Right: WhatsApp Concierge + Info */}
+          {/* Right: WhatsApp Concierge */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '40px' }}>
-
-            {/* WhatsApp Concierge Card */}
             <a
               href={WHATSAPP_LINK}
               target="_blank"
@@ -204,43 +321,6 @@ const Contact = () => {
                 </div>
               </div>
             </a>
-
-            {/* Contact Details */}
-            <div className="glass" style={{ padding: '40px', display: 'grid', gap: '30px' }}>
-              <h3 style={{ fontSize: '1.2rem', marginBottom: '5px', borderBottom: '1px solid var(--glass-border)', paddingBottom: '15px' }}>
-                Visit Our Products
-              </h3>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', opacity: 0.8 }}>
-                <div style={{ display: 'flex', gap: '15px', alignItems: 'flex-start' }}>
-                  <span style={{ color: 'var(--secondary)', fontSize: '1rem', marginTop: '2px' }}>⊹</span>
-                  <div>
-                    <p style={{ fontSize: '0.75rem', letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--secondary)', marginBottom: '5px' }}>Address</p>
-                    <p style={{ lineHeight: 1.6 }}>123 Floral Avenue, Westlands<br/>Nairobi, Kenya</p>
-                  </div>
-                </div>
-                <div style={{ display: 'flex', gap: '15px', alignItems: 'flex-start' }}>
-                  <span style={{ color: 'var(--secondary)', fontSize: '1rem', marginTop: '2px' }}>✉</span>
-                  <div>
-                    <p style={{ fontSize: '0.75rem', letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--secondary)', marginBottom: '5px' }}>Email</p>
-                    <p>concierge@gardenofscent.co.ke</p>
-                  </div>
-                </div>
-                <div style={{ display: 'flex', gap: '15px', alignItems: 'flex-start' }}>
-                  <span style={{ color: 'var(--secondary)', fontSize: '1rem', marginTop: '2px' }}>✆</span>
-                  <div>
-                    <p style={{ fontSize: '0.75rem', letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--secondary)', marginBottom: '5px' }}>WhatsApp / Phone</p>
-                    <p>+254 790 147 780</p>
-                  </div>
-                </div>
-                <div style={{ display: 'flex', gap: '15px', alignItems: 'flex-start' }}>
-                  <span style={{ color: 'var(--secondary)', fontSize: '1rem', marginTop: '2px' }}>◷</span>
-                  <div>
-                    <p style={{ fontSize: '0.75rem', letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--secondary)', marginBottom: '5px' }}>Hours</p>
-                    <p style={{ lineHeight: 1.6 }}>Mon – Sat: 9am – 7pm<br/>Sunday: 11am – 5pm</p>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
