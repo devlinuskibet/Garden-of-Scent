@@ -426,6 +426,10 @@ a:hover { color: var(--secondary); }
   letter-spacing: 2px;
 }
 
+.brand-text {
+  font-size: 18px;
+}
+
 .nav-links a {
   min-height: 48px; /* Mobile touch target */
   display: flex;
@@ -490,12 +494,26 @@ a:hover { color: var(--secondary); }
 
   /* Center logo on mobile */
   .navbar-brand {
-    font-size: 14px !important;
+    gap: 8px !important;
+  }
+  .brand-text {
+    font-size: 14px;
+    letter-spacing: 2px !important;
   }
   .navbar-brand img {
     height: 40px !important;
   }
 }
+
+@media (max-width: 400px) {
+  .brand-text {
+    font-size: 12px;
+  }
+  .collection-text {
+    display: none;
+  }
+}
+
 
 /* --- Image Performance & Fade-In --- */
 

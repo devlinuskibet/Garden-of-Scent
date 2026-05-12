@@ -111,7 +111,7 @@ const Navbar = ({ collectionCount, isDarkMode, toggleTheme }) => {
     }}>
       <div className="container flex-between" style={{ height: '100%' }}>
         <Link to="/" className="navbar-brand" style={{ zIndex: 101, display: 'flex', alignItems: 'center', gap: '12px', textDecoration: 'none' }}>
-          <span className="brand-text" style={{ fontSize: '18px', fontFamily: 'var(--font-heading)', letterSpacing: '3px', color: 'var(--text)', whiteSpace: 'nowrap' }}>GARDEN OF SCENT</span>
+          <span className="brand-text" style={{ fontFamily: 'var(--font-heading)', letterSpacing: '3px', color: 'var(--text)', whiteSpace: 'nowrap' }}>GARDEN OF SCENT</span>
           <img 
             src="/Garden Scents Luxury Minimalist Logo (4).jpg" 
             alt="Garden of Scent Luxury Minimalist Logo - Original Perfumes Kenya" 
