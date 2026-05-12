@@ -63,7 +63,7 @@ const labelStyle = {
   fontSize: '0.75rem',
   textTransform: 'uppercase',
   letterSpacing: '2px',
-  color: 'rgba(234,234,234,0.6)',
+  color: 'var(--text-muted)',
 };
 
 const Contact = () => {
@@ -83,7 +83,7 @@ const Contact = () => {
             Reach Out
           </p>
           <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', marginBottom: '20px' }}>Talk to Us</h1>
-          <p style={{ opacity: 0.6, maxWidth: '500px', margin: '0 auto', lineHeight: 1.8 }}>
+          <p style={{ color: 'var(--text-muted)', maxWidth: '500px', margin: '0 auto', lineHeight: 1.8 }}>
             Our fragrance artisans are always available to guide you through your olfactory journey.
           </p>
         </div>
@@ -130,7 +130,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <p style={{ fontSize: '0.75rem', letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--secondary)', marginBottom: '5px' }}>WhatsApp / Phone</p>
-                  <p style={{ opacity: 0.85 }}>+254 790 147 780</p>
+                  <p style={{ color: 'var(--text-muted)' }}>+254 790 147 780</p>
                 </div>
               </div>
 
@@ -141,7 +141,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <p style={{ fontSize: '0.75rem', letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--secondary)', marginBottom: '5px' }}>Hours</p>
-                  <p style={{ lineHeight: 1.6, opacity: 0.85 }}>Mon – Sat: 9am – 7pm<br/>Sunday: 11am – 5pm</p>
+                  <p style={{ lineHeight: 1.6, color: 'var(--text-muted)' }}>Mon – Sat: 9am – 7pm<br/>Sunday: 11am – 5pm</p>
                 </div>
               </div>
             </div>
@@ -179,7 +179,7 @@ const Contact = () => {
           {/* Left: Contact Form */}
           <div>
             <h2 style={{ fontSize: '2rem', marginBottom: '10px' }}>Send a Message</h2>
-            <p style={{ opacity: 0.6, marginBottom: '40px', lineHeight: 1.8 }}>
+            <p style={{ color: 'var(--text-muted)', marginBottom: '40px', lineHeight: 1.8 }}>
               Inquire about a fragrance, a bespoke commission, or a bulk order for your special occasion.
             </p>
 
@@ -187,7 +187,7 @@ const Contact = () => {
               <div className="glass" style={{ padding: '50px', textAlign: 'center' }}>
                 <div style={{ fontSize: '2.5rem', marginBottom: '20px' }}>✦</div>
                 <h3 style={{ color: 'var(--secondary)', fontSize: '1.8rem', marginBottom: '15px' }}>Message Received</h3>
-                <p style={{ opacity: 0.7, lineHeight: 1.8, marginBottom: '30px' }}>
+                <p style={{ color: 'var(--text-muted)', lineHeight: 1.8, marginBottom: '30px' }}>
                   A fragrance artisan from Garden of Scent will reach out to you within 24 hours.
                 </p>
                 <button

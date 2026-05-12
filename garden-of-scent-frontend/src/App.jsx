@@ -8,6 +8,7 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import Quiz from './pages/Quiz';
 import MyCollection from './pages/MyCollection';
+import ScrollToTop from './components/ScrollToTop';
 
 const WHATSAPP_LINK = "https://wa.me/254790147780?text=Hello%20Garden%20of%20Scents%2C%20I%20would%20like%20to%20inquire%20about%20your%20products.";
 
@@ -17,6 +18,7 @@ const WhatsAppFAB = () => (
     target="_blank"
     rel="noopener noreferrer"
     title="Chat with us"
+    className="whatsapp-fab"
     style={{
       position: 'fixed',
       bottom: '35px',
@@ -67,7 +69,37 @@ const Toast = ({ message }) => {
   );
 };
 
-const Navbar = ({ collectionCount }) => {
+const ThemeToggle = ({ isDarkMode, toggleTheme }) => (
+  <button 
+    onClick={toggleTheme}
+    style={{
+      background: 'none',
+      border: 'none',
+      color: 'var(--text)',
+      cursor: 'pointer',
+      padding: '8px',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      transition: 'transform 0.3s ease',
+    }}
+    onMouseOver={e => e.currentTarget.style.transform = 'scale(1.1)'}
+    onMouseOut={e => e.currentTarget.style.transform = 'scale(1)'}
+    aria-label="Toggle theme"
+  >
+    {isDarkMode ? (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+      </svg>
+    ) : (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+      </svg>
+    )}
+  </button>
+);
+
+const Navbar = ({ collectionCount, isDarkMode, toggleTheme }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
@@ -101,7 +133,9 @@ const Navbar = ({ collectionCount }) => {
           <li><Link to="/contact" onClick={() => setIsMenuOpen(false)}>Talk to Us</Link></li>
         </ul>
 
-        <div className="flex" style={{ gap: '20px', alignItems: 'center', zIndex: 101 }}>
+        <div className="flex" style={{ gap: '15px', alignItems: 'center', zIndex: 101 }}>
+          <ThemeToggle isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
+          
           <Link 
             to="/collection" 
             style={{ 
@@ -134,7 +168,7 @@ const Navbar = ({ collectionCount }) => {
 };
 
 const Footer = () => (
-  <footer style={{ padding: '80px 0', borderTop: '1px solid var(--glass-border)', marginTop: '80px', background: '#080d0a' }}>
+  <footer style={{ padding: '80px 0', borderTop: '1px solid var(--glass-border)', marginTop: '80px', background: 'var(--footer-bg)' }}>
     <div className="container">
       <div className="flex-between flex-responsive" style={{ flexWrap: 'wrap', gap: '40px', alignItems: 'flex-start' }}>
         <div style={{ maxWidth: '300px' }}>
@@ -203,10 +237,23 @@ function App() {
     return saved ? JSON.parse(saved) : [];
   });
   const [toastMessage, setToastMessage] = useState(null);
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    const savedTheme = localStorage.getItem('gardenOfScentTheme');
+    return savedTheme !== null ? JSON.parse(savedTheme) : true;
+  });
 
   useEffect(() => {
     localStorage.setItem('gardenOfScentCollection', JSON.stringify(collection));
   }, [collection]);
+
+  useEffect(() => {
+    localStorage.setItem('gardenOfScentTheme', JSON.stringify(isDarkMode));
+    if (isDarkMode) {
+      document.body.classList.remove('light-mode');
+    } else {
+      document.body.classList.add('light-mode');
+    }
+  }, [isDarkMode]);
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
@@ -236,6 +283,8 @@ function App() {
     };
   }, []);
 
+  const toggleTheme = () => setIsDarkMode(!isDarkMode);
+
   const addToCollection = (product) => {
     setCollection(prev => {
       if (prev.find(item => item.id === product.id)) return prev;
@@ -251,7 +300,12 @@ function App() {
 
   return (
     <Router>
-      <Navbar collectionCount={collection.length} />
+      <ScrollToTop />
+      <Navbar 
+        collectionCount={collection.length} 
+        isDarkMode={isDarkMode} 
+        toggleTheme={toggleTheme} 
+      />
       
       <Toast message={toastMessage} />
 

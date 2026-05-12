@@ -131,7 +131,7 @@ const Shop = ({ addToCollection }) => {
           <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', marginBottom: '20px' }}>
             {isFiltered ? 'Your Curated Selection' : 'Our Fragrance Collection'}
           </h1>
-          <p style={{ opacity: 0.6, fontSize: '1rem', letterSpacing: '1px' }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: '1rem', letterSpacing: '1px' }}>
             {isFiltered ? 'Fragrances matched to your olfactory profile' : 'Explore our complete botanical collection'}
           </p>
         </div>
@@ -315,7 +315,7 @@ const Shop = ({ addToCollection }) => {
               <circle cx="11" cy="11" r="8"/>
               <path d="M21 21l-4.35-4.35"/>
             </svg>
-            <p style={{ opacity: 0.5, fontSize: '1.1rem' }}>No fragrances matched this profile.</p>
+            <p style={{ color: 'var(--text-muted)', fontSize: '1.1rem' }}>No fragrances matched this profile.</p>
             <button 
               onClick={() => { setSearchQuery(''); setActiveCategory('All'); setPriceSort('default'); }}
               className="btn btn-outline"

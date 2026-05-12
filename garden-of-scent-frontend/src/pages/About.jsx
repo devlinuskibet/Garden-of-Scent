@@ -76,7 +76,7 @@ const About = () => {
             Defining Kenyan Luxury,<br />
             <span style={{ fontStyle: 'italic', color: 'var(--secondary)' }}>One Note at a Time.</span>
           </h1>
-          <p style={{ opacity: 0.7, fontSize: '1.1rem', lineHeight: 1.9, maxWidth: '600px', margin: '0 auto' }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: '1.1rem', lineHeight: 1.9, maxWidth: '600px', margin: '0 auto' }}>
             We believe luxury isn't about labels — it's about the feeling when a scent becomes part of who you are.
             Garden of Scent brings the world's finest fragrances to Kenya, one authentic bottle at a time.
           </p>
@@ -106,7 +106,7 @@ const About = () => {
             <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)', marginBottom: '35px', lineHeight: 1.2 }}>
               The Guarantee
             </h2>
-            <p style={{ opacity: 0.8, fontSize: '1.2rem', lineHeight: 2, fontStyle: 'italic', maxWidth: '700px', margin: '0 auto 40px' }}>
+            <p style={{ color: 'var(--text-muted)', fontSize: '1.2rem', lineHeight: 2, fontStyle: 'italic', maxWidth: '700px', margin: '0 auto 40px' }}>
               "In a world of imitations, we stand for the original. Every bottle in our garden is a certified authentic masterpiece."
             </p>
             <div style={{
@@ -124,7 +124,7 @@ const About = () => {
                   <p style={{ fontSize: '2.5rem', fontFamily: 'var(--font-heading)', color: 'var(--secondary)', marginBottom: '8px' }}>
                     {stat.num}
                   </p>
-                  <p style={{ fontSize: '0.8rem', opacity: 0.6, textTransform: 'uppercase', letterSpacing: '2px' }}>
+                  <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '2px' }}>
                     {stat.label}
                   </p>
                 </div>
@@ -172,7 +172,7 @@ const About = () => {
                   {s.accent}
                 </p>
                 <h3 style={{ fontSize: '1.5rem', marginBottom: '20px' }}>{s.title}</h3>
-                <p style={{ opacity: 0.7, lineHeight: 1.9, fontSize: '0.95rem' }}>{s.desc}</p>
+                <p style={{ color: 'var(--text-muted)', lineHeight: 1.9, fontSize: '0.95rem' }}>{s.desc}</p>
               </div>
             ))}
           </div>
@@ -190,7 +190,7 @@ const About = () => {
             Your Journey Starts Here
           </p>
           <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', marginBottom: '25px' }}>Find Your Signature Scent</h2>
-          <p style={{ opacity: 0.7, lineHeight: 1.8, marginBottom: '45px', fontSize: '1.05rem' }}>
+          <p style={{ color: 'var(--text-muted)', lineHeight: 1.8, marginBottom: '45px', fontSize: '1.05rem' }}>
             Not sure where to start? Our interactive Scent Finder matches you with the perfect fragrance based on your vibe, lifestyle, and occasion.
           </p>
           <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' }}>

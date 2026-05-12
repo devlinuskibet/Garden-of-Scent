@@ -86,10 +86,10 @@ const ProductCard = ({ product, addToCollection }) => {
         <Link to={`/product/${product.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
           <h3 style={{ fontSize: '1.4rem', marginBottom: '6px' }}>{product.name}</h3>
         </Link>
-        <p style={{ fontSize: '0.8rem', opacity: 0.7, marginBottom: '15px', fontStyle: 'italic' }}>
+        <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: '15px', fontStyle: 'italic' }}>
           {noteSnippet}
         </p>
-        <p style={{ opacity: 0.8, fontSize: '1.1rem', marginBottom: '20px' }}>KSh {product.price.toFixed(2)}</p>
+        <p style={{ color: 'var(--text-muted)', fontSize: '1.1rem', marginBottom: '20px' }}>KSh {product.price.toFixed(2)}</p>
         
         <a 
           href={whatsappUrl}
@@ -129,8 +129,8 @@ const ProductCard = ({ product, addToCollection }) => {
             minHeight: '48px',
             background: 'none',
             border: 'none',
-            color: added ? 'var(--secondary)' : 'var(--text)',
-            opacity: added ? 1 : 0.6,
+            color: added ? 'var(--secondary)' : 'var(--text-muted)',
+
             fontSize: '0.75rem',
             textTransform: 'uppercase',
             letterSpacing: '1px',
