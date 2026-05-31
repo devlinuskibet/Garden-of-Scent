@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, useLocation, useNavigate } from 'react-router-dom';
 import './index.css';
 import Home from './pages/Home';
 import Shop from './pages/Shop';
@@ -8,7 +8,9 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import Quiz from './pages/Quiz';
 import MyCollection from './pages/MyCollection';
+import Admin from './pages/Admin';
 import ScrollToTop from './components/ScrollToTop';
+import { supabase } from './lib/supabaseClient';
 
 const WHATSAPP_LINK = "https://wa.me/254790147780?text=Hello%20Garden%20of%20Scents%2C%20I%20would%20like%20to%20inquire%20about%20your%20products.";
 
@@ -167,8 +169,23 @@ const Navbar = ({ collectionCount, isDarkMode, toggleTheme }) => {
   );
 };
 
-const Footer = () => (
-  <footer style={{ padding: '80px 0', borderTop: '1px solid var(--glass-border)', marginTop: '80px', background: 'var(--footer-bg)' }}>
+const Footer = () => {
+  const navigate = useNavigate();
+  const [tapCount, setTapCount] = useState(0);
+
+  const handleAdminGateway = () => {
+    if (tapCount >= 2) {
+      setTapCount(0);
+      navigate('/admin');
+    } else {
+      setTapCount((prev) => prev + 1);
+      // Reset tap count if they don't tap fast enough (1 second window)
+      setTimeout(() => setTapCount(0), 1000);
+    }
+  };
+
+  return (
+    <footer style={{ padding: '80px 0', borderTop: '1px solid var(--glass-border)', marginTop: '80px', background: 'var(--footer-bg)' }}>
     <div className="container">
       <div className="flex-between flex-responsive" style={{ flexWrap: 'wrap', gap: '40px', alignItems: 'flex-start' }}>
         <div style={{ maxWidth: '300px' }}>
@@ -226,10 +243,17 @@ const Footer = () => (
         </p>
       </article>
 
-      <p style={{ textAlign: 'center', opacity: 0.4, marginTop: '40px', fontSize: '0.8rem' }}>&copy; {new Date().getFullYear()} GARDEN OF SCENT. ALL RIGHTS RESERVED.</p>
+      <p 
+        onClick={handleAdminGateway}
+        style={{ textAlign: 'center', opacity: 0.4, marginTop: '40px', fontSize: '0.8rem', cursor: 'pointer', userSelect: 'none' }}
+        title="Admin Gateway"
+      >
+        &copy; {new Date().getFullYear()} GARDEN OF SCENT. ALL RIGHTS RESERVED.
+      </p>
     </div>
   </footer>
-);
+  );
+};
 
 function App() {
   const [collection, setCollection] = useState(() => {
@@ -283,6 +307,32 @@ function App() {
     };
   }, []);
 
+  // ── Track page views in Supabase ──
+  useEffect(() => {
+    const trackPageView = async () => {
+      try {
+        const { data } = await supabase
+          .from('site_analytics')
+          .select('count')
+          .eq('event_type', 'page_view')
+          .single();
+        if (data) {
+          await supabase
+            .from('site_analytics')
+            .update({ count: data.count + 1, last_updated: new Date().toISOString() })
+            .eq('event_type', 'page_view');
+        } else {
+          await supabase
+            .from('site_analytics')
+            .insert([{ event_type: 'page_view', count: 1, last_updated: new Date().toISOString() }]);
+        }
+      } catch (err) {
+        // Silently fail — analytics should never break the user experience
+      }
+    };
+    trackPageView();
+  }, []);
+
   const toggleTheme = () => setIsDarkMode(!isDarkMode);
 
   const addToCollection = (product) => {
@@ -318,6 +368,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/quiz" element={<Quiz addToCollection={addToCollection} />} />
           <Route path="/collection" element={<MyCollection collection={collection} removeFromCollection={removeFromCollection} />} />
+          <Route path="/admin" element={<Admin />} />
         </Routes>
       </main>
       <Footer />

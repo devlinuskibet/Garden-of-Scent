@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { supabase } from '../lib/supabaseClient';
 
 const ProductCard = ({ product, addToCollection }) => {
   const [added, setAdded] = useState(false);
@@ -12,6 +13,28 @@ const ProductCard = ({ product, addToCollection }) => {
   };
   const noteSnippet = product.scent_family || 'Premium Fragrance';
   const whatsappUrl = `https://wa.me/254790147780?text=${encodeURIComponent(`Hello Garden of Scents, I am interested in ${product.name} (KSh ${product.price.toLocaleString()}). Is this currently in stock?`)}`;
+
+  const handleWhatsAppClick = async () => {
+    try {
+      const { data } = await supabase
+        .from('site_analytics')
+        .select('count')
+        .eq('event_type', 'whatsapp_click')
+        .single();
+      if (data) {
+        await supabase
+          .from('site_analytics')
+          .update({ count: data.count + 1, last_updated: new Date().toISOString() })
+          .eq('event_type', 'whatsapp_click');
+      } else {
+        await supabase
+          .from('site_analytics')
+          .insert([{ event_type: 'whatsapp_click', count: 1, last_updated: new Date().toISOString() }]);
+      }
+    } catch (err) {
+      // Silently fail
+    }
+  };
 
   const isMistProduct = product.category === 'Bath & Body Works';
 
@@ -95,6 +118,7 @@ const ProductCard = ({ product, addToCollection }) => {
           href={whatsappUrl}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={handleWhatsAppClick}
           style={{
             marginTop: 'auto',
             minHeight: '48px',

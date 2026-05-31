@@ -1,26 +1,60 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
 import ProductCard from '../components/ProductCard';
-
+import { supabase } from '../lib/supabaseClient';
 import { products as staticProducts } from '../data/products';
 
 const Shop = ({ addToCollection }) => {
-  const [allProducts, setAllProducts] = useState(staticProducts);
-  const [displayProducts, setDisplayProducts] = useState(staticProducts);
+  const [allProducts, setAllProducts] = useState([]);
+  const [displayProducts, setDisplayProducts] = useState([]);
   const [activeCategory, setActiveCategory] = useState('All');
   const [activeSubBrand, setActiveSubBrand] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
   const [priceSort, setPriceSort] = useState('default');
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const [filterDrawerOpen, setFilterDrawerOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const searchInputRef = useRef(null);
   const debounceRef = useRef(null);
   const location = useLocation();
 
   const isFiltered = !!location.search;
 
-  // Load from URL params (Scent Finder results)
+  // Helper: sort products so those with real images appear first
+  const sortImageFirst = (products) => {
+    return [...products].sort((a, b) => {
+      const aHasImg = a.image_url && a.image_url.trim() !== '' ? 0 : 1;
+      const bHasImg = b.image_url && b.image_url.trim() !== '' ? 0 : 1;
+      return aHasImg - bHasImg;
+    });
+  };
+
+  // Fetch products from Supabase on mount
   useEffect(() => {
+    const fetchProducts = async () => {
+      setIsLoading(true);
+      try {
+        const { data, error } = await supabase
+          .from('products')
+          .select('*')
+          .order('id', { ascending: true });
+        if (!error && data && data.length > 0) {
+          setAllProducts(sortImageFirst(data));
+        } else {
+          // Fallback to static data
+          setAllProducts(staticProducts);
+        }
+      } catch {
+        setAllProducts(staticProducts);
+      }
+      setIsLoading(false);
+    };
+    fetchProducts();
+  }, []);
+
+  // Load from URL params (Scent Finder results) — filter from fetched products
+  useEffect(() => {
+    if (allProducts.length === 0) return;
     if (location.search) {
       const searchParams = new URLSearchParams(location.search);
       const vibe = searchParams.get('vibe');
@@ -28,17 +62,15 @@ const Shop = ({ addToCollection }) => {
       const occasion = searchParams.get('occasion');
       const scent_family = searchParams.get('scent_family');
 
-      let filtered = staticProducts;
+      let filtered = [...allProducts];
       if (vibe) filtered = filtered.filter(p => p.vibe_tag === vibe);
       if (intensity) filtered = filtered.filter(p => p.intensity === intensity);
       if (occasion) filtered = filtered.filter(p => p.occasion === occasion);
       if (scent_family) filtered = filtered.filter(p => p.scent_family === scent_family);
 
-      setAllProducts(filtered);
-    } else {
-      setAllProducts(staticProducts);
+      setDisplayProducts(filtered);
     }
-  }, [location.search]);
+  }, [location.search, allProducts]);
 
   // Master filter pipeline: category → sub-brand → search → sort
   const applyFilters = useCallback((source, category, subBrand, query, sort) => {
